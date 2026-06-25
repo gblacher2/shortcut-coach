@@ -1,0 +1,849 @@
+{
+  "metadata": {
+    "generatedAt": "2026-06-23T14:58:23",
+    "macOSVersion": "26.5.1",
+    "karabinerPath": "/Users/gabrielblacher/.config/karabiner/karabiner.json",
+    "hotkeysPath": "/Users/gabrielblacher/Library/Preferences/com.apple.symbolichotkeys.plist",
+    "selectedKarabinerProfile": "Default profile",
+    "systemHotkeyOverrides": {
+      "19": {
+        "enabled": false,
+        "name": "Symbolic hotkey 19",
+        "value": {}
+      },
+      "21": {
+        "enabled": false,
+        "name": "Symbolic hotkey 21",
+        "value": {}
+      },
+      "80": {
+        "enabled": true,
+        "name": "Move to previous space slowly",
+        "value": {}
+      },
+      "79": {
+        "enabled": true,
+        "name": "Move to previous space",
+        "value": {}
+      },
+      "26": {
+        "enabled": false,
+        "name": "Symbolic hotkey 26",
+        "value": {}
+      },
+      "15": {
+        "enabled": false,
+        "name": "Symbolic hotkey 15",
+        "value": {}
+      },
+      "22": {
+        "enabled": false,
+        "name": "Symbolic hotkey 22",
+        "value": {}
+      },
+      "81": {
+        "enabled": true,
+        "name": "Move to next space",
+        "value": {}
+      },
+      "16": {
+        "enabled": false,
+        "name": "Symbolic hotkey 16",
+        "value": {}
+      },
+      "60": {
+        "enabled": true,
+        "name": "Select previous input source",
+        "value": {
+          "type": "standard",
+          "parameters": [
+            32,
+            49,
+            262144
+          ]
+        }
+      },
+      "23": {
+        "enabled": false,
+        "name": "Symbolic hotkey 23",
+        "value": {}
+      },
+      "82": {
+        "enabled": true,
+        "name": "Move to next space slowly",
+        "value": {}
+      },
+      "17": {
+        "enabled": false,
+        "name": "Symbolic hotkey 17",
+        "value": {}
+      },
+      "61": {
+        "enabled": true,
+        "name": "Select next input source",
+        "value": {
+          "type": "standard",
+          "parameters": [
+            32,
+            49,
+            786432
+          ]
+        }
+      },
+      "24": {
+        "enabled": false,
+        "name": "Symbolic hotkey 24",
+        "value": {}
+      },
+      "18": {
+        "enabled": false,
+        "name": "Symbolic hotkey 18",
+        "value": {}
+      },
+      "164": {
+        "enabled": false,
+        "name": "Symbolic hotkey 164",
+        "value": {
+          "type": "standard",
+          "parameters": [
+            65535,
+            65535,
+            0
+          ]
+        }
+      },
+      "20": {
+        "enabled": false,
+        "name": "Symbolic hotkey 20",
+        "value": {}
+      },
+      "25": {
+        "enabled": false,
+        "name": "Symbolic hotkey 25",
+        "value": {}
+      }
+    },
+    "counts": {
+      "total": 55,
+      "karabiner": 10,
+      "priority1": 19
+    }
+  },
+  "shortcuts": [
+    {
+      "id": "karabiner-text-editing-fn-left-arrow-go-to-the-start-of-the-current-line",
+      "shortcut": "Fn + Left Arrow",
+      "action": "Go to the start of the current line",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Left Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Left Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Left Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-right-arrow-go-to-the-end-of-the-current-line",
+      "shortcut": "Fn + Right Arrow",
+      "action": "Go to the end of the current line",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Right Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Right Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Right Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-up-arrow-jump-to-the-top-of-the-document-or-page",
+      "shortcut": "Fn + Up Arrow",
+      "action": "Jump to the top of the document or page",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Up Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Up Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Up Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-down-arrow-jump-to-the-bottom-of-the-document-or-page",
+      "shortcut": "Fn + Down Arrow",
+      "action": "Jump to the bottom of the document or page",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Down Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Down Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Down Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-shift-left-arrow-select-text-back-to-the-start-of-the-line",
+      "shortcut": "Fn + Shift + Left Arrow",
+      "action": "Select text back to the start of the line",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Shift + Left Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Left Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Left Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-shift-right-arrow-select-text-forward-to-the-end-of-the-line",
+      "shortcut": "Fn + Shift + Right Arrow",
+      "action": "Select text forward to the end of the line",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Shift + Right Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Right Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Right Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-shift-up-arrow-select-text-back-to-the-top-of-the-document",
+      "shortcut": "Fn + Shift + Up Arrow",
+      "action": "Select text back to the top of the document",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Shift + Up Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Up Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Up Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-fn-shift-down-arrow-select-text-forward-to-the-bottom-of-the-document",
+      "shortcut": "Fn + Shift + Down Arrow",
+      "action": "Select text forward to the bottom of the document",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Shift + Down Arrow",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Down Arrow.",
+      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Down Arrow do?"
+    },
+    {
+      "id": "karabiner-text-editing-command-y-redo",
+      "shortcut": "Command + Y",
+      "action": "Redo",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Command + Shift + Z",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Z.",
+      "practicePrompt": "What does your Karabiner shortcut Command + Y do?"
+    },
+    {
+      "id": "karabiner-text-editing-control-backspace-delete-the-previous-word",
+      "shortcut": "Control + Backspace",
+      "action": "Delete the previous word",
+      "source": "Karabiner",
+      "scope": "Changed on this Mac",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "Option + Backspace",
+      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Option + Backspace.",
+      "practicePrompt": "What does your Karabiner shortcut Control + Backspace do?"
+    },
+    {
+      "id": "macos-setting-window-control-control-left-arrow-move-to-the-previous-space",
+      "shortcut": "Control + Left Arrow",
+      "action": "Move to the previous Space",
+      "source": "macOS setting",
+      "scope": "System",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Confirmed in your user symbolic hotkeys file.",
+      "practicePrompt": "What does Control + Left Arrow do?"
+    },
+    {
+      "id": "macos-setting-window-control-control-right-arrow-move-to-the-next-space",
+      "shortcut": "Control + Right Arrow",
+      "action": "Move to the next Space",
+      "source": "macOS setting",
+      "scope": "System",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Confirmed in your user symbolic hotkeys file.",
+      "practicePrompt": "What does Control + Right Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-control-up-arrow-open-mission-control",
+      "shortcut": "Control + Up Arrow",
+      "action": "Open Mission Control",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Control + Up Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-control-down-arrow-show-windows-for-the-current-app",
+      "shortcut": "Control + Down Arrow",
+      "action": "Show windows for the current app",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Control + Down Arrow do?"
+    },
+    {
+      "id": "macos-setting-input-control-space-select-the-previous-input-source",
+      "shortcut": "Control + Space",
+      "action": "Select the previous input source",
+      "source": "macOS setting",
+      "scope": "System",
+      "priority": 2,
+      "context": "Input",
+      "active": true,
+      "sends": "",
+      "notes": "Confirmed in your user symbolic hotkeys file.",
+      "practicePrompt": "What does Control + Space do?"
+    },
+    {
+      "id": "macos-setting-input-control-option-space-select-the-next-input-source",
+      "shortcut": "Control + Option + Space",
+      "action": "Select the next input source",
+      "source": "macOS setting",
+      "scope": "System",
+      "priority": 3,
+      "context": "Input",
+      "active": true,
+      "sends": "",
+      "notes": "Confirmed in your user symbolic hotkeys file.",
+      "practicePrompt": "What does Control + Option + Space do?"
+    },
+    {
+      "id": "macos-default-app-switching-command-space-open-spotlight-search",
+      "shortcut": "Command + Space",
+      "action": "Open Spotlight search",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 1,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Space do?"
+    },
+    {
+      "id": "macos-default-app-switching-command-option-space-open-finder-search-window",
+      "shortcut": "Command + Option + Space",
+      "action": "Open Finder search window",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Option + Space do?"
+    },
+    {
+      "id": "macos-default-screenshots-command-shift-3-save-a-screenshot-of-the-whole-screen",
+      "shortcut": "Command + Shift + 3",
+      "action": "Save a screenshot of the whole screen",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Screenshots",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Shift + 3 do?"
+    },
+    {
+      "id": "macos-default-screenshots-command-control-shift-3-copy-a-screenshot-of-the-whole-screen",
+      "shortcut": "Command + Control + Shift + 3",
+      "action": "Copy a screenshot of the whole screen",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Screenshots",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Control + Shift + 3 do?"
+    },
+    {
+      "id": "macos-default-screenshots-command-shift-4-save-a-screenshot-of-a-selected-area",
+      "shortcut": "Command + Shift + 4",
+      "action": "Save a screenshot of a selected area",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Screenshots",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Shift + 4 do?"
+    },
+    {
+      "id": "macos-default-screenshots-command-control-shift-4-copy-a-screenshot-of-a-selected-area",
+      "shortcut": "Command + Control + Shift + 4",
+      "action": "Copy a screenshot of a selected area",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Screenshots",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Control + Shift + 4 do?"
+    },
+    {
+      "id": "macos-default-screenshots-command-shift-5-open-screenshot-and-screen-recording-options",
+      "shortcut": "Command + Shift + 5",
+      "action": "Open screenshot and screen recording options",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 1,
+      "context": "Screenshots",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Command + Shift + 5 do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-f-fill-the-current-window",
+      "shortcut": "Fn + Control + F",
+      "action": "Fill the current window",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + F do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-c-center-the-current-window",
+      "shortcut": "Fn + Control + C",
+      "action": "Center the current window",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + C do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-r-return-the-window-to-its-previous-size",
+      "shortcut": "Fn + Control + R",
+      "action": "Return the window to its previous size",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + R do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-left-arrow-tile-window-to-the-left-half",
+      "shortcut": "Fn + Control + Left Arrow",
+      "action": "Tile window to the left half",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Left Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-right-arrow-tile-window-to-the-right-half",
+      "shortcut": "Fn + Control + Right Arrow",
+      "action": "Tile window to the right half",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Right Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-up-arrow-tile-window-to-the-top-half",
+      "shortcut": "Fn + Control + Up Arrow",
+      "action": "Tile window to the top half",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Up Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-down-arrow-tile-window-to-the-bottom-half",
+      "shortcut": "Fn + Control + Down Arrow",
+      "action": "Tile window to the bottom half",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Down Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-shift-left-arrow-arrange-windows-left-and-right",
+      "shortcut": "Fn + Control + Shift + Left Arrow",
+      "action": "Arrange windows left and right",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Shift + Left Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-shift-right-arrow-arrange-windows-right-and-left",
+      "shortcut": "Fn + Control + Shift + Right Arrow",
+      "action": "Arrange windows right and left",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Shift + Right Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-shift-up-arrow-arrange-windows-top-and-bottom",
+      "shortcut": "Fn + Control + Shift + Up Arrow",
+      "action": "Arrange windows top and bottom",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Shift + Up Arrow do?"
+    },
+    {
+      "id": "macos-default-window-control-fn-control-shift-down-arrow-arrange-windows-bottom-and-top",
+      "shortcut": "Fn + Control + Shift + Down Arrow",
+      "action": "Arrange windows bottom and top",
+      "source": "macOS default",
+      "scope": "System",
+      "priority": 3,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
+      "practicePrompt": "What does Fn + Control + Shift + Down Arrow do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-tab-switch-to-the-next-app",
+      "shortcut": "Command + Tab",
+      "action": "Switch to the next app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Tab do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-shift-tab-switch-to-the-previous-app",
+      "shortcut": "Command + Shift + Tab",
+      "action": "Switch to the previous app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Shift + Tab do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-switch-to-the-next-window-in-the-current-app",
+      "shortcut": "Command + `",
+      "action": "Switch to the next window in the current app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + ` do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-h-hide-the-current-app",
+      "shortcut": "Command + H",
+      "action": "Hide the current app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + H do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-option-h-hide-all-other-apps",
+      "shortcut": "Command + Option + H",
+      "action": "Hide all other apps",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Option + H do?"
+    },
+    {
+      "id": "macos-app-default-window-control-command-m-minimize-the-front-window",
+      "shortcut": "Command + M",
+      "action": "Minimize the front window",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + M do?"
+    },
+    {
+      "id": "macos-app-default-window-control-command-w-close-the-current-window-or-tab",
+      "shortcut": "Command + W",
+      "action": "Close the current window or tab",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "Window Control",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + W do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-q-quit-the-current-app",
+      "shortcut": "Command + Q",
+      "action": "Quit the current app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Q do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-open-preferences-or-settings-for-the-current-app",
+      "shortcut": "Command + ,",
+      "action": "Open preferences or settings for the current app",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + , do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-option-esc-open-force-quit-applications",
+      "shortcut": "Command + Option + Esc",
+      "action": "Open Force Quit Applications",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Option + Esc do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-t-open-a-new-tab",
+      "shortcut": "Command + T",
+      "action": "Open a new tab",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + T do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-shift-move-to-the-previous-tab",
+      "shortcut": "Command + Shift + [",
+      "action": "Move to the previous tab",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Shift + [ do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-shift-move-to-the-next-tab",
+      "shortcut": "Command + Shift + ]",
+      "action": "Move to the next tab",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Shift + ] do?"
+    },
+    {
+      "id": "macos-app-default-app-switching-command-l-focus-the-address-search-field-in-browsers-and-many-ap",
+      "shortcut": "Command + L",
+      "action": "Focus the address/search field in browsers and many apps",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "App Switching",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + L do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-command-f-find-within-the-current-document-or-page",
+      "shortcut": "Command + F",
+      "action": "Find within the current document or page",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + F do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-command-z-undo",
+      "shortcut": "Command + Z",
+      "action": "Undo",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Z do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-command-shift-z-redo-on-standard-mac-shortcuts",
+      "shortcut": "Command + Shift + Z",
+      "action": "Redo on standard Mac shortcuts",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 1,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Command + Shift + Z do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-option-left-arrow-move-one-word-left",
+      "shortcut": "Option + Left Arrow",
+      "action": "Move one word left",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Option + Left Arrow do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-option-right-arrow-move-one-word-right",
+      "shortcut": "Option + Right Arrow",
+      "action": "Move one word right",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Option + Right Arrow do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-option-shift-left-arrow-select-one-word-left",
+      "shortcut": "Option + Shift + Left Arrow",
+      "action": "Select one word left",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Option + Shift + Left Arrow do?"
+    },
+    {
+      "id": "macos-app-default-text-editing-option-shift-right-arrow-select-one-word-right",
+      "shortcut": "Option + Shift + Right Arrow",
+      "action": "Select one word right",
+      "source": "macOS/app default",
+      "scope": "Stock daily shortcut",
+      "priority": 2,
+      "context": "Text Editing",
+      "active": true,
+      "sends": "",
+      "notes": "Common macOS convention. Some apps can override it.",
+      "practicePrompt": "What does Option + Shift + Right Arrow do?"
+    }
+  ]
+}
