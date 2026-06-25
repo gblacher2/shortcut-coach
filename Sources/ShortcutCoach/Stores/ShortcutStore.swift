@@ -126,7 +126,9 @@ final class ShortcutStore {
         do {
             let loaded = try loader.load()
             catalog = loaded.catalog
-            shortcuts = loaded.catalog.shortcuts
+            shortcuts = loaded.catalog.shortcuts.filter {
+                $0.source == "Karabiner" || $0.source == "macOS setting"
+            }
             sourceDescription = loaded.sourceDescription
             lastLoadedAt = Date()
             errorMessage = nil

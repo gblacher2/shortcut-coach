@@ -44,20 +44,6 @@ struct SearchView: View {
                         .controlSize(.small)
                     }
 
-                    HStack(spacing: 4) {
-                        Image(systemName: "exclamationmark.circle")
-                            .foregroundStyle(.secondary)
-                            .font(.subheadline)
-                        Picker("Priority", selection: $store.selectedPriority) {
-                            ForEach(store.priorities, id: \.self) { value in
-                                Text(value).tag(value)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(.menu)
-                        .controlSize(.small)
-                    }
-
                     Spacer()
                     
                     Text("\(store.filteredShortcuts.count) results")

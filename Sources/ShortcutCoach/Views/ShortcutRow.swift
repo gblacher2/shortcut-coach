@@ -9,10 +9,6 @@ struct ShortcutRow: View {
         VStack(alignment: .leading, spacing: 5) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 ShortcutChordView(shortcut: shortcut.shortcut)
-                Spacer(minLength: 8)
-                Text(shortcut.priorityLabel)
-                    .font(.caption2.weight(.semibold))
-                    .foregroundStyle(priorityColor)
             }
             Text(shortcut.action)
                 .font(.subheadline.weight(.semibold))
@@ -32,17 +28,6 @@ struct ShortcutRow: View {
             }
         }
         .opacity(shortcut.active ? 1 : 0.55)
-    }
-
-    private var priorityColor: Color {
-        switch shortcut.priority {
-        case 1:
-            .green
-        case 2:
-            .blue
-        default:
-            .orange
-        }
     }
 }
 
