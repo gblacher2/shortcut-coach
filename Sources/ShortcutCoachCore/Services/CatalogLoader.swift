@@ -1,8 +1,11 @@
 import Foundation
 
 public struct CatalogLoader {
-    public static let liveCatalogURL = URL(fileURLWithPath: "/Users/gabrielblacher/Documents/Codex/mac-shortcuts-guide/mac-shortcuts.json")
-    public static let fullGuideURL = URL(fileURLWithPath: "/Users/gabrielblacher/Documents/Codex/mac-shortcuts-guide/mac-shortcuts.html")
+    public static let liveGuideDirectoryURL = FileManager.default
+        .homeDirectoryForCurrentUser
+        .appendingPathComponent("Projects/mac-shortcuts-guide", isDirectory: true)
+    public static let liveCatalogURL = liveGuideDirectoryURL.appendingPathComponent("mac-shortcuts.json")
+    public static let fullGuideURL = liveGuideDirectoryURL.appendingPathComponent("mac-shortcuts.html")
 
     public init() {}
 
