@@ -1,0 +1,3 @@
+## 2023-10-27 - Added Clear Button to Search Field
+**Learning:** SwiftUI's `.plain` `TextField` style doesn't automatically provide a clear button, requiring a custom conditional implementation. Furthermore, decorative icons adjacent to text fields (like a search magnifying glass) should use `.accessibilityHidden(true)` so VoiceOver doesn't needlessly read them out when focusing the search field.
+**Action:** When creating custom text fields with the `.plain` style, remember to manually implement a clear button, include `.accessibilityLabel` and `.help` for it, and hide decorative surrounding icons from accessibility tools.
