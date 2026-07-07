@@ -9,8 +9,20 @@ struct SearchView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(.secondary)
+                        .accessibilityHidden(true)
                     TextField("Search shortcut or action", text: $store.query)
                         .textFieldStyle(.plain)
+                    if !store.query.isEmpty {
+                        Button {
+                            store.query = ""
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Clear search")
+                        .help("Clear search")
+                    }
                 }
                 .padding(8)
                 .background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 8))
