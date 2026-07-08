@@ -11,6 +11,18 @@ struct SearchView: View {
                         .foregroundStyle(.secondary)
                     TextField("Search shortcut or action", text: $store.query)
                         .textFieldStyle(.plain)
+
+                    if !store.query.isEmpty {
+                        Button {
+                            store.query = ""
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Clear search")
+                        .accessibilityLabel("Clear search")
+                    }
                 }
                 .padding(8)
                 .background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 8))
