@@ -3,7 +3,7 @@ import SwiftUI
 
 struct TodayView: View {
     @Bindable var store: ShortcutStore
-    let shortcuts: [ShortcutItem]
+    let shortcuts: [ShortcutCatalogEntry]
 
     var body: some View {
         ScrollView {

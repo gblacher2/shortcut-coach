@@ -45,7 +45,7 @@ let shortcuts = loaded.catalog.shortcuts
 // ---------------------------------------------------------------------------
 
 print("\n📋 Catalog decode checks")
-check("Total shortcut count == 55", shortcuts.count == 55)
+check("Total shortcut count == 102", shortcuts.count == 102)
 check("Karabiner shortcut count == 10",
       shortcuts.filter { $0.source == "Karabiner" }.count == 10)
 
@@ -136,7 +136,7 @@ if let firstModifiedToday = today.first(where: { $0.shortcut.contains("+") }) {
 }
 
 
-func makeDummyShortcut(shortcut: String) -> ShortcutItem {
+func makeDummyShortcut(shortcut: String) -> ShortcutCatalogEntry {
     let json = """
     {
         "id": "test-id",
@@ -152,7 +152,7 @@ func makeDummyShortcut(shortcut: String) -> ShortcutItem {
         "practicePrompt": ""
     }
     """
-    return try! JSONDecoder().decode(ShortcutItem.self, from: json.data(using: .utf8)!)
+    return try! JSONDecoder().decode(ShortcutCatalogEntry.self, from: json.data(using: .utf8)!)
 }
 
 let cmdZ = makeDummyShortcut(shortcut: "Command + Z")
@@ -186,6 +186,103 @@ check("Ctrl+Backspace matches control and backspace (127)",
 let cmdBacktick = makeDummyShortcut(shortcut: "Command + `")
 check("Cmd+Backtick matches command and backtick",
       cmdBacktick.matches(flags: .command, charsIgnoringModifiers: "`"))
+
+// ---------------------------------------------------------------------------
+// 7 — Catalog integrity tests
+// ---------------------------------------------------------------------------
+
+print("\n🔒 Catalog integrity checks")
+
+// Check for duplicate IDs
+let allIDs = shortcuts.map { $0.id }
+let uniqueIDs = Set(allIDs)
+check("No duplicate shortcut IDs", allIDs.count == uniqueIDs.count)
+
+// Missing metadata & invalid key/task values
+var hasMissingMetadata = false
+var hasInvalidValues = false
+for s in shortcuts {
+    if s.id.isEmpty || s.source.isEmpty || s.context.isEmpty {
+        hasMissingMetadata = true
+    }
+    if s.shortcut.isEmpty || s.action.isEmpty {
+        hasInvalidValues = true
+    }
+}
+check("No missing metadata (id, source, context)", !hasMissingMetadata)
+check("No invalid key/task values (shortcut, action)", !hasInvalidValues)
+
+// Dangling related IDs
+var hasDanglingRelatedIDs = false
+for s in shortcuts {
+    if s.notes.contains("Related: [") {
+        if let range = s.notes.range(of: "Related: [") {
+            let rest = s.notes[range.upperBound...]
+            if let endRange = rest.range(of: "]") {
+                let idsString = rest[..<endRange.lowerBound]
+                let relatedIDs = idsString.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+                for relatedID in relatedIDs {
+                    if !relatedID.isEmpty && !uniqueIDs.contains(relatedID) {
+                        print("    Dangling ID found: \(relatedID) in \(s.id)")
+                        hasDanglingRelatedIDs = true
+                    }
+                }
+            }
+        }
+    }
+}
+check("No dangling related IDs", !hasDanglingRelatedIDs)
+
+// Fewer than five entries per app
+let appsToCheck = ["Google Chrome", "ChatGPT for macOS", "Google Antigravity", "Pages", "Finder", "Spotify", "WhatsApp", "Preview", "Apple Mail"]
+var hasFewerThanFive = false
+for app in appsToCheck {
+    let count = shortcuts.filter { $0.context == app }.count
+    if count < 5 {
+        print("    App \(app) has fewer than 5 entries (\(count))")
+        hasFewerThanFive = true
+    }
+}
+check("All requested apps have at least 5 entries", !hasFewerThanFive)
+
+// ---------------------------------------------------------------------------
+// 7 — Local Library Persistence & Migration
+// ---------------------------------------------------------------------------
+
+print("\n💾 Persistence & migration checks")
+let tempDir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+try! FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true, attributes: nil)
+let managerURL = tempDir.appendingPathComponent("test-library.json")
+let manager = UserLibraryManager(fileURL: managerURL)
+
+var state = try! manager.load()
+check("New manager loads empty state", state.favourites.isEmpty && state.recents.isEmpty)
+
+state.favourites.insert("test-fav-1")
+state.recents.append("test-fav-1")
+try! manager.save(state)
+
+let loadedState = try! manager.load()
+check("Manager saves and loads state successfully", loadedState.favourites.contains("test-fav-1") && loadedState.recents.first == "test-fav-1")
+
+let exportURL = tempDir.appendingPathComponent("export.json")
+try! manager.export(to: exportURL, state: loadedState)
+check("Export creates file", FileManager.default.fileExists(atPath: exportURL.path))
+
+let importedState = try! manager.import(from: exportURL)
+check("Import returns correct state", importedState.favourites == loadedState.favourites)
+
+let malformedURL = tempDir.appendingPathComponent("malformed.json")
+try! "not json".write(to: malformedURL, atomically: true, encoding: .utf8)
+do {
+    _ = try manager.import(from: malformedURL)
+    check("Malformed import fails", false)
+} catch {
+    check("Malformed import throws error", true)
+}
+
+let unchangedState = try! manager.load()
+check("Failed import does not overwrite existing state", unchangedState.favourites.contains("test-fav-1"))
 
 // ---------------------------------------------------------------------------
 // Summary

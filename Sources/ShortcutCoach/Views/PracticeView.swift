@@ -25,7 +25,7 @@ struct PracticeView: View {
 }
 
 private struct PracticeCard: View {
-    let shortcut: ShortcutItem
+    let shortcut: ShortcutCatalogEntry
     let isRevealed: Bool
     let onToggle: () -> Void
 

@@ -2,7 +2,7 @@ import ShortcutCoachCore
 import SwiftUI
 
 struct ShortcutRow: View {
-    let shortcut: ShortcutItem
+    let shortcut: ShortcutCatalogEntry
     let showNotes: Bool
 
     var body: some View {
