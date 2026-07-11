@@ -1,38 +1,73 @@
 import Foundation
 
-public enum ShortcutFilters {
-    public static func today(_ shortcuts: [ShortcutCatalogEntry]) -> [ShortcutCatalogEntry] {
-        shortcuts
-            .filter { $0.active && $0.priority == 1 }
-            .sorted { first, second in
-                let firstSourceRank = sourceRank(first.source)
-                let secondSourceRank = sourceRank(second.source)
-                if firstSourceRank != secondSourceRank {
-                    return firstSourceRank < secondSourceRank
-                }
-                if first.context != second.context {
-                    return first.context < second.context
-                }
-                return first.shortcut < second.shortcut
+public struct ShortcutSearchQuery: Equatable, Sendable {
+    public var text: String
+    public var sidebar: SidebarSelection
+    public var appID: String?
+    public var tags: Set<String>
+
+    public init(text: String = "", sidebar: SidebarSelection = .all, appID: String? = nil, tags: Set<String> = []) {
+        self.text = text
+        self.sidebar = sidebar
+        self.appID = appID
+        self.tags = tags
+    }
+}
+
+public struct ShortcutSearchService: Sendable {
+    public init() {}
+
+    public func results(
+        in entries: [ShortcutCatalogEntry],
+        query: ShortcutSearchQuery,
+        userState: UserLibraryState
+    ) -> [ShortcutCatalogEntry] {
+        var filtered = entries
+        switch query.sidebar {
+        case .all: break
+        case .favourites: filtered.removeAll { !userState.favourites.contains($0.id) }
+        case .toLearn: filtered.removeAll { !userState.toLearn.contains($0.id) }
+        case .recentlyViewed:
+            let order = Dictionary(uniqueKeysWithValues: userState.recents.enumerated().map { ($1, $0) })
+            filtered = filtered.filter { order[$0.id] != nil }.sorted { order[$0.id]! < order[$1.id]! }
+        case let .app(appID): filtered.removeAll { $0.appID != appID }
+        case let .tag(tag): filtered.removeAll { !$0.taskTags.contains(tag) }
+        case let .collection(collectionID):
+            let IDs = userState.collections[collectionID]?.shortcutIDs ?? []
+            filtered.removeAll { !IDs.contains($0.id) }
+        }
+
+        if let appID = query.appID { filtered.removeAll { $0.appID != appID } }
+        if !query.tags.isEmpty { filtered.removeAll { !query.tags.isSubset(of: Set($0.taskTags)) } }
+
+        let terms = query.text
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
+            .split(whereSeparator: { $0.isWhitespace })
+            .map(String.init)
+        if !terms.isEmpty {
+            filtered.removeAll { entry in
+                let haystack = entry.searchableText.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
+                return !terms.allSatisfy(haystack.contains)
             }
-            .prefix(10)
-            .map { $0 }
+        }
+
+        if case .recentlyViewed = query.sidebar { return filtered }
+        return filtered.sorted {
+            if $0.appName != $1.appName { return $0.appName.localizedStandardCompare($1.appName) == .orderedAscending }
+            return $0.title.localizedStandardCompare($1.title) == .orderedAscending
+        }
+    }
+}
+
+public enum ShortcutFilters {
+    private static let search = ShortcutSearchService()
+
+    public static func today(_ shortcuts: [ShortcutCatalogEntry]) -> [ShortcutCatalogEntry] {
+        Array(shortcuts.prefix(10))
     }
 
     public static func practice(_ shortcuts: [ShortcutCatalogEntry]) -> [ShortcutCatalogEntry] {
-        shortcuts
-            .filter { $0.active && $0.priority <= 2 }
-            .sorted { first, second in
-                if first.priority != second.priority {
-                    return first.priority < second.priority
-                }
-                if first.context != second.context {
-                    return first.context < second.context
-                }
-                return first.shortcut < second.shortcut
-            }
-            .prefix(18)
-            .map { $0 }
+        Array(shortcuts.prefix(18))
     }
 
     public static func filter(
@@ -46,48 +81,20 @@ public enum ShortcutFilters {
         toLearnOnly: Bool = false,
         userState: UserLibraryState? = nil
     ) -> [ShortcutCatalogEntry] {
-        let normalizedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        return shortcuts.filter { shortcut in
-            let matchesQuery: Bool
-            if normalizedQuery.isEmpty {
-                matchesQuery = true
-            } else {
-                let searchable = [
-                    shortcut.shortcut,
-                    shortcut.action,
-                    shortcut.source,
-                    shortcut.scope,
-                    shortcut.context,
-                    shortcut.notes
-                ].joined(separator: " ").lowercased()
-                matchesQuery = searchable.contains(normalizedQuery)
-            }
-
-            let matchesContext = context == "All" || shortcut.context == context
-            let matchesSource = source == "All" || shortcut.source == source
-            let matchesPriority = priority == "All" || shortcut.priorityLabel == priority
-            
-            let matchesTags = tags.isEmpty || tags.allSatisfy { shortcut.tags.contains($0) }
-            
-            let matchesFavs = !favouritesOnly || (userState?.favourites.contains(shortcut.id) == true)
-            let matchesToLearn = !toLearnOnly || (userState?.toLearn.contains(shortcut.id) == true)
-            
-            return matchesQuery && matchesContext && matchesSource && matchesPriority && matchesTags && matchesFavs && matchesToLearn
-        }
-    }
-
-    private static func sourceRank(_ source: String) -> Int {
-        switch source {
-        case "Karabiner":
-            0
-        case "macOS setting":
-            1
-        case "macOS default":
-            2
-        case "macOS/app default":
-            3
-        default:
-            9
-        }
+        let state = userState ?? UserLibraryState()
+        let sidebar: SidebarSelection = favouritesOnly ? .favourites : (toLearnOnly ? .toLearn : .all)
+        var results = search.results(
+            in: shortcuts,
+            query: ShortcutSearchQuery(
+                text: query,
+                sidebar: sidebar,
+                appID: context == "All" ? nil : SupportedApp.launchApps.first(where: { $0.name == context })?.id,
+                tags: Set(tags)
+            ),
+            userState: state
+        )
+        if source != "All" { results.removeAll { $0.source != source } }
+        if priority != "All" { results.removeAll { $0.priorityLabel != priority } }
+        return results
     }
 }
