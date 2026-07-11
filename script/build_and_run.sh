@@ -124,10 +124,12 @@ case "$MODE" in
 
     # 5. Validate the immutable, versioned catalog inside the staged core bundle.
     CATALOG_PATH="$APP_CONTENTS/$CORE_RESOURCE_BUNDLE/mac-shortcuts.json"
-    if [ ! -f "$CATALOG_PATH" ] || ! python3 -c "import json; json.load(open('$CATALOG_PATH'))" >/dev/null 2>&1; then
+    if [ ! -f "$CATALOG_PATH" ]; then
       echo "FAIL: immutable catalog missing or malformed" >&2; exit 1
     fi
-    SCHEMA_VERSION=$(/usr/bin/plutil -extract schemaVersion raw -o - "$CATALOG_PATH")
+    if ! SCHEMA_VERSION=$(/usr/bin/plutil -extract schemaVersion raw -o - "$CATALOG_PATH" 2>/dev/null); then
+      echo "FAIL: immutable catalog missing or malformed" >&2; exit 1
+    fi
     if [ "$SCHEMA_VERSION" != "1" ]; then
       echo "FAIL: unexpected catalog schema $SCHEMA_VERSION" >&2; exit 1
     fi

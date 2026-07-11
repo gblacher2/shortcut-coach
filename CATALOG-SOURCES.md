@@ -1,8 +1,6 @@
 # Shortcut Coach catalog source ledger
 
-Catalog version: `1.0.0`  
-Catalog schema: `1`  
-Verified: 2026-07-11 on macOS 26.5.1 (25F80)
+Catalog version: `1.0.0` · Catalog schema: `1` · Verified: 2026-07-11 on macOS 26.5.1 (25F80)
 
 The built-in catalog is immutable application data. Personal favourites, To Learn status, collections, notes, and recents are stored separately and are never written into the catalog.
 
