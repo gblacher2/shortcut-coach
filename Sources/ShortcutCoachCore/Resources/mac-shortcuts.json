@@ -1,849 +1,2047 @@
 {
-  "metadata": {
-    "generatedAt": "2026-06-23T14:58:23",
-    "macOSVersion": "26.5.1",
-    "karabinerPath": "/Users/gabrielblacher/.config/karabiner/karabiner.json",
-    "hotkeysPath": "/Users/gabrielblacher/Library/Preferences/com.apple.symbolichotkeys.plist",
-    "selectedKarabinerProfile": "Default profile",
-    "systemHotkeyOverrides": {
-      "19": {
-        "enabled": false,
-        "name": "Symbolic hotkey 19",
-        "value": {}
-      },
-      "21": {
-        "enabled": false,
-        "name": "Symbolic hotkey 21",
-        "value": {}
-      },
-      "80": {
-        "enabled": true,
-        "name": "Move to previous space slowly",
-        "value": {}
-      },
-      "79": {
-        "enabled": true,
-        "name": "Move to previous space",
-        "value": {}
-      },
-      "26": {
-        "enabled": false,
-        "name": "Symbolic hotkey 26",
-        "value": {}
-      },
-      "15": {
-        "enabled": false,
-        "name": "Symbolic hotkey 15",
-        "value": {}
-      },
-      "22": {
-        "enabled": false,
-        "name": "Symbolic hotkey 22",
-        "value": {}
-      },
-      "81": {
-        "enabled": true,
-        "name": "Move to next space",
-        "value": {}
-      },
-      "16": {
-        "enabled": false,
-        "name": "Symbolic hotkey 16",
-        "value": {}
-      },
-      "60": {
-        "enabled": true,
-        "name": "Select previous input source",
-        "value": {
-          "type": "standard",
-          "parameters": [
-            32,
-            49,
-            262144
-          ]
-        }
-      },
-      "23": {
-        "enabled": false,
-        "name": "Symbolic hotkey 23",
-        "value": {}
-      },
-      "82": {
-        "enabled": true,
-        "name": "Move to next space slowly",
-        "value": {}
-      },
-      "17": {
-        "enabled": false,
-        "name": "Symbolic hotkey 17",
-        "value": {}
-      },
-      "61": {
-        "enabled": true,
-        "name": "Select next input source",
-        "value": {
-          "type": "standard",
-          "parameters": [
-            32,
-            49,
-            786432
-          ]
-        }
-      },
-      "24": {
-        "enabled": false,
-        "name": "Symbolic hotkey 24",
-        "value": {}
-      },
-      "18": {
-        "enabled": false,
-        "name": "Symbolic hotkey 18",
-        "value": {}
-      },
-      "164": {
-        "enabled": false,
-        "name": "Symbolic hotkey 164",
-        "value": {
-          "type": "standard",
-          "parameters": [
-            65535,
-            65535,
-            0
-          ]
-        }
-      },
-      "20": {
-        "enabled": false,
-        "name": "Symbolic hotkey 20",
-        "value": {}
-      },
-      "25": {
-        "enabled": false,
-        "name": "Symbolic hotkey 25",
-        "value": {}
-      }
+  "schemaVersion": 1,
+  "catalogVersion": "1.0.0",
+  "publishedAt": "2026-07-11",
+  "validatedMacOSVersion": "26.5.1",
+  "apps": [
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "bundleIdentifier": "com.google.Chrome",
+      "aliases": [
+        "Chrome",
+        "browser"
+      ],
+      "symbolName": "globe"
     },
-    "counts": {
-      "total": 55,
-      "karabiner": 10,
-      "priority1": 19
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "bundleIdentifier": "com.openai.chat",
+      "aliases": [
+        "ChatGPT for macOS",
+        "OpenAI"
+      ],
+      "symbolName": "bubble.left.and.bubble.right"
+    },
+    {
+      "id": "antigravity",
+      "name": "Antigravity",
+      "bundleIdentifier": "com.google.antigravity",
+      "aliases": [
+        "IDE",
+        "editor"
+      ],
+      "symbolName": "chevron.left.forwardslash.chevron.right"
+    },
+    {
+      "id": "pages",
+      "name": "Pages",
+      "bundleIdentifier": "com.apple.iWork.Pages",
+      "aliases": [
+        "Apple Pages",
+        "word processor"
+      ],
+      "symbolName": "doc.text"
+    },
+    {
+      "id": "finder",
+      "name": "Finder",
+      "bundleIdentifier": "com.apple.finder",
+      "aliases": [
+        "files"
+      ],
+      "symbolName": "folder"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "bundleIdentifier": "com.spotify.client",
+      "aliases": [
+        "music"
+      ],
+      "symbolName": "music.note"
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "bundleIdentifier": "net.whatsapp.WhatsApp",
+      "aliases": [
+        "messages",
+        "chat"
+      ],
+      "symbolName": "message"
+    },
+    {
+      "id": "preview",
+      "name": "Preview",
+      "bundleIdentifier": "com.apple.Preview",
+      "aliases": [
+        "PDF",
+        "images"
+      ],
+      "symbolName": "doc.richtext"
+    },
+    {
+      "id": "mail",
+      "name": "Apple Mail",
+      "bundleIdentifier": "com.apple.mail",
+      "aliases": [
+        "Mail",
+        "email"
+      ],
+      "symbolName": "envelope"
     }
-  },
+  ],
   "shortcuts": [
     {
-      "id": "karabiner-text-editing-fn-left-arrow-go-to-the-start-of-the-current-line",
-      "shortcut": "Fn + Left Arrow",
-      "action": "Go to the start of the current line",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Left Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Left Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Left Arrow do?"
+      "id": "chrome.new-tab",
+      "app": "chrome",
+      "title": "Open a new tab",
+      "keys": [
+        "Command",
+        "T"
+      ],
+      "displayText": "Command + T",
+      "taskTags": [
+        "Browse",
+        "Tabs"
+      ],
+      "category": "Navigation",
+      "guidance": "Start a fresh task without leaving the current window.",
+      "menuPath": [
+        "File",
+        "New Tab"
+      ],
+      "relatedIDs": [
+        "chrome.reopen-tab",
+        "chrome.close-tab"
+      ],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-fn-right-arrow-go-to-the-end-of-the-current-line",
-      "shortcut": "Fn + Right Arrow",
-      "action": "Go to the end of the current line",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Right Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Right Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Right Arrow do?"
+      "id": "chrome.reopen-tab",
+      "app": "chrome",
+      "title": "Reopen the last closed tab",
+      "keys": [
+        "Command",
+        "Shift",
+        "T"
+      ],
+      "displayText": "Command + Shift + T",
+      "taskTags": [
+        "Browse",
+        "Recovery"
+      ],
+      "category": "Navigation",
+      "guidance": "Recover a tab you closed accidentally; repeat to restore earlier tabs.",
+      "menuPath": [
+        "File",
+        "Reopen Closed Tab"
+      ],
+      "relatedIDs": [
+        "chrome.new-tab"
+      ],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-fn-up-arrow-jump-to-the-top-of-the-document-or-page",
-      "shortcut": "Fn + Up Arrow",
-      "action": "Jump to the top of the document or page",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Up Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Up Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Up Arrow do?"
+      "id": "chrome.focus-address",
+      "app": "chrome",
+      "title": "Focus the address bar",
+      "keys": [
+        "Command",
+        "L"
+      ],
+      "displayText": "Command + L",
+      "taskTags": [
+        "Browse",
+        "Search"
+      ],
+      "category": "Navigation",
+      "guidance": "Jump to the address bar to enter a URL or search without reaching for the pointer.",
+      "menuPath": [
+        "File",
+        "Open Location"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-fn-down-arrow-jump-to-the-bottom-of-the-document-or-page",
-      "shortcut": "Fn + Down Arrow",
-      "action": "Jump to the bottom of the document or page",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Down Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Down Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Down Arrow do?"
+      "id": "chrome.close-tab",
+      "app": "chrome",
+      "title": "Close the current tab",
+      "keys": [
+        "Command",
+        "W"
+      ],
+      "displayText": "Command + W",
+      "taskTags": [
+        "Browse",
+        "Tabs"
+      ],
+      "category": "Window Management",
+      "guidance": "Close the active tab while keeping the Chrome window open.",
+      "menuPath": [
+        "File",
+        "Close Tab"
+      ],
+      "relatedIDs": [
+        "chrome.reopen-tab"
+      ],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-fn-shift-left-arrow-select-text-back-to-the-start-of-the-line",
-      "shortcut": "Fn + Shift + Left Arrow",
-      "action": "Select text back to the start of the line",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Shift + Left Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Left Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Left Arrow do?"
+      "id": "chrome.find-page",
+      "app": "chrome",
+      "title": "Find text on the current page",
+      "keys": [
+        "Command",
+        "F"
+      ],
+      "displayText": "Command + F",
+      "taskTags": [
+        "Browse",
+        "Find"
+      ],
+      "category": "Search",
+      "guidance": "Locate a word or phrase within the page you are reading.",
+      "menuPath": [
+        "Edit",
+        "Find",
+        "Find…"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-fn-shift-right-arrow-select-text-forward-to-the-end-of-the-line",
-      "shortcut": "Fn + Shift + Right Arrow",
-      "action": "Select text forward to the end of the line",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Shift + Right Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Right Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Right Arrow do?"
+      "id": "chrome.developer-tools",
+      "app": "chrome",
+      "title": "Open Developer Tools",
+      "keys": [
+        "Command",
+        "Option",
+        "I"
+      ],
+      "displayText": "Command + Option + I",
+      "taskTags": [
+        "Develop",
+        "Inspect"
+      ],
+      "category": "Development",
+      "guidance": "Inspect page structure, network requests, storage, and console output.",
+      "menuPath": [
+        "View",
+        "Developer",
+        "Developer Tools"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Chrome keyboard shortcuts — Google Chrome Help",
+        "url": "https://support.google.com/chrome/answer/157179",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "150.0.7871.114",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": "Intended for development and troubleshooting."
     },
     {
-      "id": "karabiner-text-editing-fn-shift-up-arrow-select-text-back-to-the-top-of-the-document",
-      "shortcut": "Fn + Shift + Up Arrow",
-      "action": "Select text back to the top of the document",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Shift + Up Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Up Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Up Arrow do?"
+      "id": "chatgpt.chat-bar",
+      "app": "chatgpt",
+      "title": "Open the Chat Bar",
+      "keys": [
+        "Option",
+        "Space"
+      ],
+      "displayText": "Option + Space",
+      "taskTags": [
+        "Ask",
+        "Launcher"
+      ],
+      "category": "Navigation",
+      "guidance": "Open ChatGPT from any app and put the cursor in the prompt field.",
+      "menuPath": [
+        "ChatGPT",
+        "Settings",
+        "Keyboard Shortcut"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "ChatGPT macOS app documentation and release notes",
+        "url": "https://help.openai.com/en/articles/9703738-mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "version-sensitive",
+      "caveat": "This global shortcut is customizable in ChatGPT settings and may conflict with another app."
     },
     {
-      "id": "karabiner-text-editing-fn-shift-down-arrow-select-text-forward-to-the-bottom-of-the-document",
-      "shortcut": "Fn + Shift + Down Arrow",
-      "action": "Select text forward to the bottom of the document",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Shift + Down Arrow",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Down Arrow.",
-      "practicePrompt": "What does your Karabiner shortcut Fn + Shift + Down Arrow do?"
+      "id": "chatgpt.find-conversation",
+      "app": "chatgpt",
+      "title": "Find text in the conversation",
+      "keys": [
+        "Command",
+        "F"
+      ],
+      "displayText": "Command + F",
+      "taskTags": [
+        "Find",
+        "Conversation"
+      ],
+      "category": "Search",
+      "guidance": "Locate a phrase in the conversation currently open.",
+      "menuPath": [
+        "Edit",
+        "Find",
+        "Find…"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "ChatGPT macOS app documentation and release notes",
+        "url": "https://help.openai.com/en/articles/9703738-mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "karabiner-text-editing-command-y-redo",
-      "shortcut": "Command + Y",
-      "action": "Redo",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Command + Shift + Z",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Command + Shift + Z.",
-      "practicePrompt": "What does your Karabiner shortcut Command + Y do?"
+      "id": "chatgpt.stop-response",
+      "app": "chatgpt",
+      "title": "Stop the streaming response",
+      "keys": [
+        "Command",
+        "."
+      ],
+      "displayText": "Command + .",
+      "taskTags": [
+        "Respond",
+        "Control"
+      ],
+      "category": "Conversation",
+      "guidance": "Stop a response when you already have what you need or want to redirect the conversation.",
+      "menuPath": null,
+      "relatedIDs": [],
+      "source": {
+        "title": "ChatGPT macOS app documentation and release notes",
+        "url": "https://help.openai.com/en/articles/9703738-mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Documented in the macOS release notes; availability may vary by app build."
     },
     {
-      "id": "karabiner-text-editing-control-backspace-delete-the-previous-word",
-      "shortcut": "Control + Backspace",
-      "action": "Delete the previous word",
-      "source": "Karabiner",
-      "scope": "Changed on this Mac",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "Option + Backspace",
-      "notes": "Caps Lock may be held too; Karabiner treats it as optional for this rule. Sends Option + Backspace.",
-      "practicePrompt": "What does your Karabiner shortcut Control + Backspace do?"
+      "id": "chatgpt.share-desktop",
+      "app": "chatgpt",
+      "title": "Share the main desktop",
+      "keys": [
+        "Command",
+        "Shift",
+        "1"
+      ],
+      "displayText": "Command + Shift + 1",
+      "taskTags": [
+        "Work with Apps",
+        "Screenshot"
+      ],
+      "category": "Capture",
+      "guidance": "Attach the main desktop when visual context is necessary.",
+      "menuPath": null,
+      "relatedIDs": [
+        "chatgpt.share-window"
+      ],
+      "source": {
+        "title": "ChatGPT macOS app documentation and release notes",
+        "url": "https://help.openai.com/en/articles/9703738-mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Requires ChatGPT screen-recording access and may not be available to every workspace."
     },
     {
-      "id": "macos-setting-window-control-control-left-arrow-move-to-the-previous-space",
-      "shortcut": "Control + Left Arrow",
-      "action": "Move to the previous Space",
-      "source": "macOS setting",
-      "scope": "System",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Confirmed in your user symbolic hotkeys file.",
-      "practicePrompt": "What does Control + Left Arrow do?"
+      "id": "chatgpt.share-window",
+      "app": "chatgpt",
+      "title": "Share the active window",
+      "keys": [
+        "Command",
+        "Shift",
+        "2"
+      ],
+      "displayText": "Command + Shift + 2",
+      "taskTags": [
+        "Work with Apps",
+        "Screenshot"
+      ],
+      "category": "Capture",
+      "guidance": "Attach only the active window to keep visual context focused.",
+      "menuPath": null,
+      "relatedIDs": [
+        "chatgpt.share-desktop"
+      ],
+      "source": {
+        "title": "ChatGPT macOS app documentation and release notes",
+        "url": "https://help.openai.com/en/articles/9703738-mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Requires ChatGPT screen-recording access and may not be available to every workspace."
     },
     {
-      "id": "macos-setting-window-control-control-right-arrow-move-to-the-next-space",
-      "shortcut": "Control + Right Arrow",
-      "action": "Move to the next Space",
-      "source": "macOS setting",
-      "scope": "System",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Confirmed in your user symbolic hotkeys file.",
-      "practicePrompt": "What does Control + Right Arrow do?"
+      "id": "antigravity.new-window",
+      "app": "antigravity",
+      "title": "Open a new window",
+      "keys": [
+        "Command",
+        "Shift",
+        "N"
+      ],
+      "displayText": "Command + Shift + N",
+      "taskTags": [
+        "Window",
+        "Workspace"
+      ],
+      "category": "Window Management",
+      "guidance": "Open another Antigravity window for a separate project or task.",
+      "menuPath": [
+        "File",
+        "New Window"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Installed Antigravity 2.2.1 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "2.2.1",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Verified from the installed 2.2.1 menu; Antigravity may change Electron menu bindings."
     },
     {
-      "id": "macos-default-window-control-control-up-arrow-open-mission-control",
-      "shortcut": "Control + Up Arrow",
-      "action": "Open Mission Control",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Control + Up Arrow do?"
+      "id": "antigravity.close-window",
+      "app": "antigravity",
+      "title": "Close the current window",
+      "keys": [
+        "Command",
+        "W"
+      ],
+      "displayText": "Command + W",
+      "taskTags": [
+        "Window",
+        "Workspace"
+      ],
+      "category": "Window Management",
+      "guidance": "Close the active Antigravity window without quitting the app.",
+      "menuPath": [
+        "File",
+        "Close Window"
+      ],
+      "relatedIDs": [
+        "antigravity.new-window"
+      ],
+      "source": {
+        "title": "Installed Antigravity 2.2.1 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "2.2.1",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Verified from the installed 2.2.1 menu."
     },
     {
-      "id": "macos-default-window-control-control-down-arrow-show-windows-for-the-current-app",
-      "shortcut": "Control + Down Arrow",
-      "action": "Show windows for the current app",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Control + Down Arrow do?"
+      "id": "antigravity.undo",
+      "app": "antigravity",
+      "title": "Undo the last edit",
+      "keys": [
+        "Command",
+        "Z"
+      ],
+      "displayText": "Command + Z",
+      "taskTags": [
+        "Edit",
+        "Recovery"
+      ],
+      "category": "Editing",
+      "guidance": "Reverse the most recent editable action.",
+      "menuPath": [
+        "Edit",
+        "Undo"
+      ],
+      "relatedIDs": [
+        "antigravity.redo"
+      ],
+      "source": {
+        "title": "Installed Antigravity 2.2.1 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "2.2.1",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "contextual",
+      "caveat": "The focused editor or control determines what is undone."
     },
     {
-      "id": "macos-setting-input-control-space-select-the-previous-input-source",
-      "shortcut": "Control + Space",
-      "action": "Select the previous input source",
-      "source": "macOS setting",
-      "scope": "System",
-      "priority": 2,
-      "context": "Input",
-      "active": true,
-      "sends": "",
-      "notes": "Confirmed in your user symbolic hotkeys file.",
-      "practicePrompt": "What does Control + Space do?"
+      "id": "antigravity.redo",
+      "app": "antigravity",
+      "title": "Redo the last edit",
+      "keys": [
+        "Command",
+        "Shift",
+        "Z"
+      ],
+      "displayText": "Command + Shift + Z",
+      "taskTags": [
+        "Edit",
+        "Recovery"
+      ],
+      "category": "Editing",
+      "guidance": "Reapply the most recently undone action.",
+      "menuPath": [
+        "Edit",
+        "Redo"
+      ],
+      "relatedIDs": [
+        "antigravity.undo"
+      ],
+      "source": {
+        "title": "Installed Antigravity 2.2.1 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "2.2.1",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "contextual",
+      "caveat": "The focused editor or control determines what is redone."
     },
     {
-      "id": "macos-setting-input-control-option-space-select-the-next-input-source",
-      "shortcut": "Control + Option + Space",
-      "action": "Select the next input source",
-      "source": "macOS setting",
-      "scope": "System",
-      "priority": 3,
-      "context": "Input",
-      "active": true,
-      "sends": "",
-      "notes": "Confirmed in your user symbolic hotkeys file.",
-      "practicePrompt": "What does Control + Option + Space do?"
+      "id": "antigravity.reload",
+      "app": "antigravity",
+      "title": "Reload the application window",
+      "keys": [
+        "Command",
+        "R"
+      ],
+      "displayText": "Command + R",
+      "taskTags": [
+        "Window",
+        "Troubleshoot"
+      ],
+      "category": "Application",
+      "guidance": "Reload the Electron window when the interface is stale.",
+      "menuPath": [
+        "View",
+        "Reload"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Installed Antigravity 2.2.1 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "2.2.1",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "version-sensitive",
+      "caveat": "Reload can interrupt unsaved in-progress UI state; use it for troubleshooting."
     },
     {
-      "id": "macos-default-app-switching-command-space-open-spotlight-search",
-      "shortcut": "Command + Space",
-      "action": "Open Spotlight search",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 1,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Space do?"
+      "id": "pages.new-document",
+      "app": "pages",
+      "title": "Create a new document",
+      "keys": [
+        "Command",
+        "N"
+      ],
+      "displayText": "Command + N",
+      "taskTags": [
+        "Write",
+        "Document"
+      ],
+      "category": "Documents",
+      "guidance": "Open the template chooser to start a new Pages document.",
+      "menuPath": [
+        "File",
+        "New"
+      ],
+      "relatedIDs": [
+        "pages.save"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-app-switching-command-option-space-open-finder-search-window",
-      "shortcut": "Command + Option + Space",
-      "action": "Open Finder search window",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Option + Space do?"
+      "id": "pages.save",
+      "app": "pages",
+      "title": "Save the document",
+      "keys": [
+        "Command",
+        "S"
+      ],
+      "displayText": "Command + S",
+      "taskTags": [
+        "Write",
+        "Save"
+      ],
+      "category": "Documents",
+      "guidance": "Persist the current document after a meaningful edit.",
+      "menuPath": [
+        "File",
+        "Save"
+      ],
+      "relatedIDs": [
+        "pages.new-document"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-screenshots-command-shift-3-save-a-screenshot-of-the-whole-screen",
-      "shortcut": "Command + Shift + 3",
-      "action": "Save a screenshot of the whole screen",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Screenshots",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Shift + 3 do?"
+      "id": "pages.find",
+      "app": "pages",
+      "title": "Find text",
+      "keys": [
+        "Command",
+        "F"
+      ],
+      "displayText": "Command + F",
+      "taskTags": [
+        "Write",
+        "Find"
+      ],
+      "category": "Search",
+      "guidance": "Locate a word or phrase in a long document.",
+      "menuPath": [
+        "Edit",
+        "Find",
+        "Find…"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-screenshots-command-control-shift-3-copy-a-screenshot-of-the-whole-screen",
-      "shortcut": "Command + Control + Shift + 3",
-      "action": "Copy a screenshot of the whole screen",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Screenshots",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Control + Shift + 3 do?"
+      "id": "pages.bold",
+      "app": "pages",
+      "title": "Apply boldface",
+      "keys": [
+        "Command",
+        "B"
+      ],
+      "displayText": "Command + B",
+      "taskTags": [
+        "Write",
+        "Format"
+      ],
+      "category": "Formatting",
+      "guidance": "Emphasize selected text with bold styling.",
+      "menuPath": [
+        "Format",
+        "Font",
+        "Bold"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-screenshots-command-shift-4-save-a-screenshot-of-a-selected-area",
-      "shortcut": "Command + Shift + 4",
-      "action": "Save a screenshot of a selected area",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Screenshots",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Shift + 4 do?"
+      "id": "pages.add-link",
+      "app": "pages",
+      "title": "Turn text or an object into a link",
+      "keys": [
+        "Command",
+        "K"
+      ],
+      "displayText": "Command + K",
+      "taskTags": [
+        "Write",
+        "Link"
+      ],
+      "category": "Formatting",
+      "guidance": "Attach a web or document destination to the current selection.",
+      "menuPath": [
+        "Format",
+        "Add Link"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-screenshots-command-control-shift-4-copy-a-screenshot-of-a-selected-area",
-      "shortcut": "Command + Control + Shift + 4",
-      "action": "Copy a screenshot of a selected area",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Screenshots",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Control + Shift + 4 do?"
+      "id": "pages.comment",
+      "app": "pages",
+      "title": "Add a comment",
+      "keys": [
+        "Command",
+        "Shift",
+        "K"
+      ],
+      "displayText": "Command + Shift + K",
+      "taskTags": [
+        "Review",
+        "Comment"
+      ],
+      "category": "Collaboration",
+      "guidance": "Leave a review note on selected text, an object, or a table cell.",
+      "menuPath": [
+        "Insert",
+        "Comment"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts for Pages on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/pages/keyboard-shortcuts-tanc0ffef022/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "14.4",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-screenshots-command-shift-5-open-screenshot-and-screen-recording-options",
-      "shortcut": "Command + Shift + 5",
-      "action": "Open screenshot and screen recording options",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 1,
-      "context": "Screenshots",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Command + Shift + 5 do?"
+      "id": "finder.new-window",
+      "app": "finder",
+      "title": "Open a new Finder window",
+      "keys": [
+        "Command",
+        "N"
+      ],
+      "displayText": "Command + N",
+      "taskTags": [
+        "Files",
+        "Window"
+      ],
+      "category": "Window Management",
+      "guidance": "Open another Finder window for moving or comparing files.",
+      "menuPath": [
+        "File",
+        "New Finder Window"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-f-fill-the-current-window",
-      "shortcut": "Fn + Control + F",
-      "action": "Fill the current window",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + F do?"
+      "id": "finder.new-folder",
+      "app": "finder",
+      "title": "Create a new folder",
+      "keys": [
+        "Command",
+        "Shift",
+        "N"
+      ],
+      "displayText": "Command + Shift + N",
+      "taskTags": [
+        "Files",
+        "Organize"
+      ],
+      "category": "File Management",
+      "guidance": "Create a folder in the current location before filing items.",
+      "menuPath": [
+        "File",
+        "New Folder"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-c-center-the-current-window",
-      "shortcut": "Fn + Control + C",
-      "action": "Center the current window",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + C do?"
+      "id": "finder.get-info",
+      "app": "finder",
+      "title": "Show Get Info",
+      "keys": [
+        "Command",
+        "I"
+      ],
+      "displayText": "Command + I",
+      "taskTags": [
+        "Files",
+        "Inspect"
+      ],
+      "category": "File Management",
+      "guidance": "Inspect size, dates, permissions, tags, and the default app for the selection.",
+      "menuPath": [
+        "File",
+        "Get Info"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-r-return-the-window-to-its-previous-size",
-      "shortcut": "Fn + Control + R",
-      "action": "Return the window to its previous size",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + R do?"
+      "id": "finder.open-selected",
+      "app": "finder",
+      "title": "Open the selected item",
+      "keys": [
+        "Command",
+        "Down Arrow"
+      ],
+      "displayText": "Command + Down Arrow",
+      "taskTags": [
+        "Files",
+        "Open"
+      ],
+      "category": "Navigation",
+      "guidance": "Open the selected file or descend into the selected folder.",
+      "menuPath": [
+        "File",
+        "Open"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-left-arrow-tile-window-to-the-left-half",
-      "shortcut": "Fn + Control + Left Arrow",
-      "action": "Tile window to the left half",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Left Arrow do?"
+      "id": "finder.trash",
+      "app": "finder",
+      "title": "Move the selected item to Trash",
+      "keys": [
+        "Command",
+        "Delete"
+      ],
+      "displayText": "Command + Delete",
+      "taskTags": [
+        "Files",
+        "Delete"
+      ],
+      "category": "File Management",
+      "guidance": "Move selected files or folders to Trash for reversible removal.",
+      "menuPath": [
+        "File",
+        "Move to Trash"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "contextual",
+      "caveat": "This moves items to Trash; it does not permanently erase them."
     },
     {
-      "id": "macos-default-window-control-fn-control-right-arrow-tile-window-to-the-right-half",
-      "shortcut": "Fn + Control + Right Arrow",
-      "action": "Tile window to the right half",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Right Arrow do?"
+      "id": "finder.quick-look",
+      "app": "finder",
+      "title": "Preview the selected item",
+      "keys": [
+        "Space"
+      ],
+      "displayText": "Space",
+      "taskTags": [
+        "Files",
+        "Preview"
+      ],
+      "category": "Viewing",
+      "guidance": "Inspect a file quickly without opening its full application.",
+      "menuPath": [
+        "File",
+        "Quick Look"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Mac keyboard shortcuts — Apple Support",
+        "url": "https://support.apple.com/102650",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-up-arrow-tile-window-to-the-top-half",
-      "shortcut": "Fn + Control + Up Arrow",
-      "action": "Tile window to the top half",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Up Arrow do?"
+      "id": "spotify.play-pause",
+      "app": "spotify",
+      "title": "Play or pause",
+      "keys": [
+        "Space"
+      ],
+      "displayText": "Space",
+      "taskTags": [
+        "Listen",
+        "Playback"
+      ],
+      "category": "Playback",
+      "guidance": "Pause or resume the current track when Spotify has keyboard focus.",
+      "menuPath": null,
+      "relatedIDs": [],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "contextual",
+      "caveat": "Space acts on playback only when focus is not inside an editable control."
     },
     {
-      "id": "macos-default-window-control-fn-control-down-arrow-tile-window-to-the-bottom-half",
-      "shortcut": "Fn + Control + Down Arrow",
-      "action": "Tile window to the bottom half",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Down Arrow do?"
+      "id": "spotify.open-search",
+      "app": "spotify",
+      "title": "Open Search",
+      "keys": [
+        "Command",
+        "K"
+      ],
+      "displayText": "Command + K",
+      "taskTags": [
+        "Listen",
+        "Search"
+      ],
+      "category": "Navigation",
+      "guidance": "Jump directly to Spotify search.",
+      "menuPath": null,
+      "relatedIDs": [
+        "spotify.filter"
+      ],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-shift-left-arrow-arrange-windows-left-and-right",
-      "shortcut": "Fn + Control + Shift + Left Arrow",
-      "action": "Arrange windows left and right",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Shift + Left Arrow do?"
+      "id": "spotify.filter",
+      "app": "spotify",
+      "title": "Filter the current list",
+      "keys": [
+        "Command",
+        "F"
+      ],
+      "displayText": "Command + F",
+      "taskTags": [
+        "Listen",
+        "Filter"
+      ],
+      "category": "Search",
+      "guidance": "Narrow a playlist, library view, or other supported list.",
+      "menuPath": null,
+      "relatedIDs": [
+        "spotify.open-search"
+      ],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "contextual",
+      "caveat": "Availability depends on the current Spotify view."
     },
     {
-      "id": "macos-default-window-control-fn-control-shift-right-arrow-arrange-windows-right-and-left",
-      "shortcut": "Fn + Control + Shift + Right Arrow",
-      "action": "Arrange windows right and left",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Shift + Right Arrow do?"
+      "id": "spotify.shuffle",
+      "app": "spotify",
+      "title": "Toggle shuffle",
+      "keys": [
+        "Option",
+        "S"
+      ],
+      "displayText": "Option + S",
+      "taskTags": [
+        "Listen",
+        "Playback"
+      ],
+      "category": "Playback",
+      "guidance": "Turn shuffled playback on or off.",
+      "menuPath": null,
+      "relatedIDs": [],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-shift-up-arrow-arrange-windows-top-and-bottom",
-      "shortcut": "Fn + Control + Shift + Up Arrow",
-      "action": "Arrange windows top and bottom",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Shift + Up Arrow do?"
+      "id": "spotify.repeat",
+      "app": "spotify",
+      "title": "Toggle repeat",
+      "keys": [
+        "Option",
+        "R"
+      ],
+      "displayText": "Option + R",
+      "taskTags": [
+        "Listen",
+        "Playback"
+      ],
+      "category": "Playback",
+      "guidance": "Cycle the repeat mode for the current playback context.",
+      "menuPath": null,
+      "relatedIDs": [],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-default-window-control-fn-control-shift-down-arrow-arrange-windows-bottom-and-top",
-      "shortcut": "Fn + Control + Shift + Down Arrow",
-      "action": "Arrange windows bottom and top",
-      "source": "macOS default",
-      "scope": "System",
-      "priority": 3,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Stock macOS shortcut from the local Keyboard Settings table.",
-      "practicePrompt": "What does Fn + Control + Shift + Down Arrow do?"
+      "id": "spotify.queue",
+      "app": "spotify",
+      "title": "Go to the queue",
+      "keys": [
+        "Option",
+        "Shift",
+        "Q"
+      ],
+      "displayText": "Option + Shift + Q",
+      "taskTags": [
+        "Listen",
+        "Queue"
+      ],
+      "category": "Navigation",
+      "guidance": "Open the play queue to review or reorder what plays next.",
+      "menuPath": null,
+      "relatedIDs": [],
+      "source": {
+        "title": "Spotify keyboard shortcuts — Spotify Support",
+        "url": "https://support.spotify.com/article/keyboard-shortcuts/",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": "1.2.93.667",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-tab-switch-to-the-next-app",
-      "shortcut": "Command + Tab",
-      "action": "Switch to the next app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Tab do?"
+      "id": "whatsapp.new-chat",
+      "app": "whatsapp",
+      "title": "Start a new chat",
+      "keys": [
+        "Command",
+        "N"
+      ],
+      "displayText": "Command + N",
+      "taskTags": [
+        "Message",
+        "Compose"
+      ],
+      "category": "Messaging",
+      "guidance": "Open the new-chat chooser and start a conversation.",
+      "menuPath": [
+        "File",
+        "New Chat"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-shift-tab-switch-to-the-previous-app",
-      "shortcut": "Command + Shift + Tab",
-      "action": "Switch to the previous app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Shift + Tab do?"
+      "id": "whatsapp.new-group",
+      "app": "whatsapp",
+      "title": "Create a new group",
+      "keys": [
+        "Command",
+        "Shift",
+        "N"
+      ],
+      "displayText": "Command + Shift + N",
+      "taskTags": [
+        "Message",
+        "Group"
+      ],
+      "category": "Messaging",
+      "guidance": "Start the installed app's new-group flow.",
+      "menuPath": [
+        "File",
+        "New group"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-switch-to-the-next-window-in-the-current-app",
-      "shortcut": "Command + `",
-      "action": "Switch to the next window in the current app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + ` do?"
+      "id": "whatsapp.search",
+      "app": "whatsapp",
+      "title": "Search WhatsApp",
+      "keys": [
+        "Command",
+        "F"
+      ],
+      "displayText": "Command + F",
+      "taskTags": [
+        "Message",
+        "Search"
+      ],
+      "category": "Search",
+      "guidance": "Search across chats from the main WhatsApp window.",
+      "menuPath": [
+        "File",
+        "Search"
+      ],
+      "relatedIDs": [
+        "whatsapp.search-chat"
+      ],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-h-hide-the-current-app",
-      "shortcut": "Command + H",
-      "action": "Hide the current app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + H do?"
+      "id": "whatsapp.search-chat",
+      "app": "whatsapp",
+      "title": "Search within the current chat",
+      "keys": [
+        "Command",
+        "Option",
+        "F"
+      ],
+      "displayText": "Command + Option + F",
+      "taskTags": [
+        "Message",
+        "Search"
+      ],
+      "category": "Search",
+      "guidance": "Find a word or phrase in the conversation currently open.",
+      "menuPath": [
+        "Chat",
+        "Search Chat"
+      ],
+      "relatedIDs": [
+        "whatsapp.search"
+      ],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-option-h-hide-all-other-apps",
-      "shortcut": "Command + Option + H",
-      "action": "Hide all other apps",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Option + H do?"
+      "id": "whatsapp.previous-chat",
+      "app": "whatsapp",
+      "title": "Go to the previous chat",
+      "keys": [
+        "Command",
+        "Shift",
+        "["
+      ],
+      "displayText": "Command + Shift + [",
+      "taskTags": [
+        "Message",
+        "Navigate"
+      ],
+      "category": "Navigation",
+      "guidance": "Move to the previous chat without leaving the keyboard.",
+      "menuPath": [
+        "View",
+        "Previous Chat"
+      ],
+      "relatedIDs": [
+        "whatsapp.next-chat"
+      ],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-window-control-command-m-minimize-the-front-window",
-      "shortcut": "Command + M",
-      "action": "Minimize the front window",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + M do?"
+      "id": "whatsapp.next-chat",
+      "app": "whatsapp",
+      "title": "Go to the next chat",
+      "keys": [
+        "Command",
+        "Shift",
+        "]"
+      ],
+      "displayText": "Command + Shift + ]",
+      "taskTags": [
+        "Message",
+        "Navigate"
+      ],
+      "category": "Navigation",
+      "guidance": "Move to the next chat without leaving the keyboard.",
+      "menuPath": [
+        "View",
+        "Next Chat"
+      ],
+      "relatedIDs": [
+        "whatsapp.previous-chat"
+      ],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-window-control-command-w-close-the-current-window-or-tab",
-      "shortcut": "Command + W",
-      "action": "Close the current window or tab",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "Window Control",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + W do?"
+      "id": "whatsapp.settings",
+      "app": "whatsapp",
+      "title": "Open Settings",
+      "keys": [
+        "Command",
+        ","
+      ],
+      "displayText": "Command + ,",
+      "taskTags": [
+        "Message",
+        "Settings"
+      ],
+      "category": "Application",
+      "guidance": "Open WhatsApp settings.",
+      "menuPath": [
+        "WhatsApp",
+        "Settings"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Installed WhatsApp 26.26.73 menu inspection",
+        "url": null,
+        "kind": "installed-app-menu"
+      },
+      "validation": {
+        "appVersion": "26.26.73",
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Read AX menu item shortcut characters and modifier flags from the installed application."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-q-quit-the-current-app",
-      "shortcut": "Command + Q",
-      "action": "Quit the current app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Q do?"
+      "id": "preview.save",
+      "app": "preview",
+      "title": "Save the file",
+      "keys": [
+        "Command",
+        "S"
+      ],
+      "displayText": "Command + S",
+      "taskTags": [
+        "PDF",
+        "Save"
+      ],
+      "category": "Documents",
+      "guidance": "Save changes to the current PDF or image.",
+      "menuPath": [
+        "File",
+        "Save"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-open-preferences-or-settings-for-the-current-app",
-      "shortcut": "Command + ,",
-      "action": "Open preferences or settings for the current app",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + , do?"
+      "id": "preview.next-page",
+      "app": "preview",
+      "title": "Move to the next page",
+      "keys": [
+        "Option",
+        "Down Arrow"
+      ],
+      "displayText": "Option + Down Arrow",
+      "taskTags": [
+        "PDF",
+        "Navigate"
+      ],
+      "category": "Navigation",
+      "guidance": "Advance one page in a multi-page document.",
+      "menuPath": [
+        "Go",
+        "Next Page"
+      ],
+      "relatedIDs": [
+        "preview.previous-page"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-option-esc-open-force-quit-applications",
-      "shortcut": "Command + Option + Esc",
-      "action": "Open Force Quit Applications",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Option + Esc do?"
+      "id": "preview.previous-page",
+      "app": "preview",
+      "title": "Move to the previous page",
+      "keys": [
+        "Option",
+        "Up Arrow"
+      ],
+      "displayText": "Option + Up Arrow",
+      "taskTags": [
+        "PDF",
+        "Navigate"
+      ],
+      "category": "Navigation",
+      "guidance": "Go back one page in a multi-page document.",
+      "menuPath": [
+        "Go",
+        "Previous Page"
+      ],
+      "relatedIDs": [
+        "preview.next-page"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-t-open-a-new-tab",
-      "shortcut": "Command + T",
-      "action": "Open a new tab",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + T do?"
+      "id": "preview.actual-size",
+      "app": "preview",
+      "title": "Zoom all images to actual size",
+      "keys": [
+        "Command",
+        "Option",
+        "0"
+      ],
+      "displayText": "Command + Option + 0",
+      "taskTags": [
+        "PDF",
+        "Zoom"
+      ],
+      "category": "Viewing",
+      "guidance": "Show images at their actual pixel size.",
+      "menuPath": [
+        "View",
+        "Actual Size"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-shift-move-to-the-previous-tab",
-      "shortcut": "Command + Shift + [",
-      "action": "Move to the previous tab",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Shift + [ do?"
+      "id": "preview.fit",
+      "app": "preview",
+      "title": "Zoom all images to fit",
+      "keys": [
+        "Command",
+        "Option",
+        "9"
+      ],
+      "displayText": "Command + Option + 9",
+      "taskTags": [
+        "PDF",
+        "Zoom"
+      ],
+      "category": "Viewing",
+      "guidance": "Fit the full image or page comfortably in the window.",
+      "menuPath": [
+        "View",
+        "Zoom to Fit"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-shift-move-to-the-next-tab",
-      "shortcut": "Command + Shift + ]",
-      "action": "Move to the next tab",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Shift + ] do?"
+      "id": "preview.zoom-in",
+      "app": "preview",
+      "title": "Zoom all images in",
+      "keys": [
+        "Command",
+        "Option",
+        "+"
+      ],
+      "displayText": "Command + Option + +",
+      "taskTags": [
+        "PDF",
+        "Zoom"
+      ],
+      "category": "Viewing",
+      "guidance": "Increase magnification for closer inspection.",
+      "menuPath": [
+        "View",
+        "Zoom In"
+      ],
+      "relatedIDs": [
+        "preview.zoom-out"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-app-switching-command-l-focus-the-address-search-field-in-browsers-and-many-ap",
-      "shortcut": "Command + L",
-      "action": "Focus the address/search field in browsers and many apps",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "App Switching",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + L do?"
+      "id": "preview.zoom-out",
+      "app": "preview",
+      "title": "Zoom all images out",
+      "keys": [
+        "Command",
+        "Option",
+        "-"
+      ],
+      "displayText": "Command + Option + -",
+      "taskTags": [
+        "PDF",
+        "Zoom"
+      ],
+      "category": "Viewing",
+      "guidance": "Decrease magnification to see more of the document.",
+      "menuPath": [
+        "View",
+        "Zoom Out"
+      ],
+      "relatedIDs": [
+        "preview.zoom-in"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Preview on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/preview/cpprvw0003/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-text-editing-command-f-find-within-the-current-document-or-page",
-      "shortcut": "Command + F",
-      "action": "Find within the current document or page",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + F do?"
+      "id": "mail.new-message",
+      "app": "mail",
+      "title": "Start a new email",
+      "keys": [
+        "Command",
+        "N"
+      ],
+      "displayText": "Command + N",
+      "taskTags": [
+        "Email",
+        "Compose"
+      ],
+      "category": "Messaging",
+      "guidance": "Open a fresh message composer.",
+      "menuPath": [
+        "File",
+        "New Message"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-text-editing-command-z-undo",
-      "shortcut": "Command + Z",
-      "action": "Undo",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Z do?"
+      "id": "mail.attach",
+      "app": "mail",
+      "title": "Attach files",
+      "keys": [
+        "Command",
+        "Shift",
+        "A"
+      ],
+      "displayText": "Command + Shift + A",
+      "taskTags": [
+        "Email",
+        "Attach"
+      ],
+      "category": "Messaging",
+      "guidance": "Choose files to attach to the draft you are writing.",
+      "menuPath": [
+        "File",
+        "Attach Files…"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-text-editing-command-shift-z-redo-on-standard-mac-shortcuts",
-      "shortcut": "Command + Shift + Z",
-      "action": "Redo on standard Mac shortcuts",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 1,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Command + Shift + Z do?"
+      "id": "mail.get-mail",
+      "app": "mail",
+      "title": "Get new emails",
+      "keys": [
+        "Command",
+        "Shift",
+        "N"
+      ],
+      "displayText": "Command + Shift + N",
+      "taskTags": [
+        "Email",
+        "Sync"
+      ],
+      "category": "Messaging",
+      "guidance": "Ask Mail to check configured accounts for new messages.",
+      "menuPath": [
+        "Mailbox",
+        "Get All New Mail"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-text-editing-option-left-arrow-move-one-word-left",
-      "shortcut": "Option + Left Arrow",
-      "action": "Move one word left",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Option + Left Arrow do?"
+      "id": "mail.send",
+      "app": "mail",
+      "title": "Send the email",
+      "keys": [
+        "Command",
+        "Shift",
+        "D"
+      ],
+      "displayText": "Command + Shift + D",
+      "taskTags": [
+        "Email",
+        "Send"
+      ],
+      "category": "Messaging",
+      "guidance": "Send the current draft when it is ready.",
+      "menuPath": [
+        "Message",
+        "Send"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "contextual",
+      "caveat": "Review recipients and attachments before using this shortcut."
     },
     {
-      "id": "macos-app-default-text-editing-option-right-arrow-move-one-word-right",
-      "shortcut": "Option + Right Arrow",
-      "action": "Move one word right",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Option + Right Arrow do?"
+      "id": "mail.reply",
+      "app": "mail",
+      "title": "Reply to the selected email",
+      "keys": [
+        "Command",
+        "R"
+      ],
+      "displayText": "Command + R",
+      "taskTags": [
+        "Email",
+        "Reply"
+      ],
+      "category": "Messaging",
+      "guidance": "Reply to the sender of the selected message.",
+      "menuPath": [
+        "Message",
+        "Reply"
+      ],
+      "relatedIDs": [
+        "mail.reply-all"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     },
     {
-      "id": "macos-app-default-text-editing-option-shift-left-arrow-select-one-word-left",
-      "shortcut": "Option + Shift + Left Arrow",
-      "action": "Select one word left",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Option + Shift + Left Arrow do?"
+      "id": "mail.reply-all",
+      "app": "mail",
+      "title": "Reply to all recipients",
+      "keys": [
+        "Command",
+        "Shift",
+        "R"
+      ],
+      "displayText": "Command + Shift + R",
+      "taskTags": [
+        "Email",
+        "Reply"
+      ],
+      "category": "Messaging",
+      "guidance": "Reply to the sender and every other recipient.",
+      "menuPath": [
+        "Message",
+        "Reply All"
+      ],
+      "relatedIDs": [
+        "mail.reply"
+      ],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "contextual",
+      "caveat": "Check the recipient list before sending."
     },
     {
-      "id": "macos-app-default-text-editing-option-shift-right-arrow-select-one-word-right",
-      "shortcut": "Option + Shift + Right Arrow",
-      "action": "Select one word right",
-      "source": "macOS/app default",
-      "scope": "Stock daily shortcut",
-      "priority": 2,
-      "context": "Text Editing",
-      "active": true,
-      "sends": "",
-      "notes": "Common macOS convention. Some apps can override it.",
-      "practicePrompt": "What does Option + Shift + Right Arrow do?"
+      "id": "mail.forward",
+      "app": "mail",
+      "title": "Forward the selected email",
+      "keys": [
+        "Command",
+        "Shift",
+        "F"
+      ],
+      "displayText": "Command + Shift + F",
+      "taskTags": [
+        "Email",
+        "Forward"
+      ],
+      "category": "Messaging",
+      "guidance": "Create a draft containing the selected message for a new recipient.",
+      "menuPath": [
+        "Message",
+        "Forward"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
+    },
+    {
+      "id": "mail.toggle-read",
+      "app": "mail",
+      "title": "Mark as read or unread",
+      "keys": [
+        "Command",
+        "Shift",
+        "U"
+      ],
+      "displayText": "Command + Shift + U",
+      "taskTags": [
+        "Email",
+        "Triage"
+      ],
+      "category": "Organization",
+      "guidance": "Toggle the read state of the selected messages.",
+      "menuPath": [
+        "Message",
+        "Mark as Unread"
+      ],
+      "relatedIDs": [],
+      "source": {
+        "title": "Keyboard shortcuts in Mail on Mac — Apple Support",
+        "url": "https://support.apple.com/guide/mail/mlhlb94f262b/mac",
+        "kind": "official-documentation"
+      },
+      "validation": {
+        "appVersion": null,
+        "macOSVersion": "26.5.1",
+        "verifiedAt": "2026-07-11",
+        "method": "Checked the current official support page."
+      },
+      "stability": "stable",
+      "caveat": null
     }
   ]
 }

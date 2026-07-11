@@ -1,28 +1,26 @@
-import AppKit
 import Foundation
 
-public struct ShortcutCatalog: Decodable, Sendable {
-    public let metadata: CatalogMetadata
+public struct ShortcutCatalog: Codable, Sendable {
+    public let schemaVersion: Int
+    public let catalogVersion: String
+    public let publishedAt: String
+    public let validatedMacOSVersion: String
+    public let apps: [SupportedApp]
     public let shortcuts: [ShortcutCatalogEntry]
-}
 
-public struct CatalogMetadata: Decodable, Sendable {
-    public let generatedAt: String
-    public let macOSVersion: String
-    public let selectedKarabinerProfile: String?
-    public let counts: CatalogCounts
-}
-
-public struct CatalogCounts: Decodable, Sendable {
-    public let total: Int
-    public let karabiner: Int
-    public let priority1: Int
-}
-
-public enum ShortcutTab: String, CaseIterable, Identifiable, Sendable {
-    case today = "Today"
-    case search = "Search"
-    case practice = "Practice"
-
-    public var id: String { rawValue }
+    public init(
+        schemaVersion: Int,
+        catalogVersion: String,
+        publishedAt: String,
+        validatedMacOSVersion: String,
+        apps: [SupportedApp],
+        shortcuts: [ShortcutCatalogEntry]
+    ) {
+        self.schemaVersion = schemaVersion
+        self.catalogVersion = catalogVersion
+        self.publishedAt = publishedAt
+        self.validatedMacOSVersion = validatedMacOSVersion
+        self.apps = apps
+        self.shortcuts = shortcuts
+    }
 }

@@ -6,14 +6,13 @@ public enum CoachFormatters {
             return source
         }
 
-        let profile = catalog.metadata.selectedKarabinerProfile ?? "Unknown profile"
         let timePart: String
         if let loadedAt {
             timePart = DateFormatter.localizedString(from: loadedAt, dateStyle: .none, timeStyle: .short)
         } else {
             timePart = "not loaded"
         }
-        return "\(source) - \(catalog.shortcuts.count) shortcuts - \(profile) - \(timePart)"
+        return "\(source) - \(catalog.shortcuts.count) shortcuts - \(timePart)"
     }
 
     public static func shortAction(_ action: String) -> String {
