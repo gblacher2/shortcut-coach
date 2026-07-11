@@ -61,7 +61,7 @@ cat >"$INFO_PLIST" <<PLIST
   <key>LSMinimumSystemVersion</key>
   <string>$MIN_SYSTEM_VERSION</string>
   <key>LSUIElement</key>
-  <true/>
+  <false/>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
 </dict>
@@ -98,12 +98,12 @@ case "$MODE" in
     fi
     echo "  ✓ Info.plist valid"
 
-    # 2. LSUIElement is set (menu-bar-only)
+    # 2. The app is a regular windowed app with an additional MenuBarExtra.
     LSE=$(/usr/libexec/PlistBuddy -c "Print :LSUIElement" "$INFO_PLIST" 2>/dev/null || echo "missing")
-    if [ "$LSE" != "true" ]; then
-      echo "FAIL: LSUIElement not set to true" >&2; exit 1
+    if [ "$LSE" != "false" ]; then
+      echo "FAIL: LSUIElement should be false for the main-window app" >&2; exit 1
     fi
-    echo "  ✓ LSUIElement = true"
+    echo "  ✓ LSUIElement = false"
 
     # 3. Resource bundles are present
     for rb_name in "$CORE_RESOURCE_BUNDLE" "$APP_RESOURCE_BUNDLE"; do
@@ -122,33 +122,16 @@ case "$MODE" in
       echo "FAIL: '$APP_NAME' process not found after launch" >&2; exit 1
     fi
 
-    # 5. Fallback resource test — launch a second instance with the live
-    #    catalog path overridden to a nonexistent location via env var.
-    #    This doesn't rename/delete the real guide file; the app must read
-    #    SHORTCUTCOACH_CATALOG_OVERRIDE when set, falling back to the
-    #    bundled JSON when that path doesn't exist.
-    echo "  — Testing bundled fallback (override catalog path to nonexistent)…"
-    pkill -x "$APP_NAME" >/dev/null 2>&1 || true
-    sleep 1
-    SHORTCUTCOACH_CATALOG_OVERRIDE="/tmp/__nonexistent_catalog__.json" \
-      /usr/bin/open -n "$APP_BUNDLE" --env SHORTCUTCOACH_CATALOG_OVERRIDE="/tmp/__nonexistent_catalog__.json"
-    sleep 2
-    if pgrep -x "$APP_NAME" >/dev/null; then
-      echo "  ✓ App launched with fallback catalog (pid $(pgrep -x "$APP_NAME" | head -1))"
-    else
-      echo "  ⚠ App did not stay running with fallback catalog (may need env var support in CatalogLoader)"
+    # 5. Validate the immutable, versioned catalog inside the staged core bundle.
+    CATALOG_PATH="$APP_CONTENTS/$CORE_RESOURCE_BUNDLE/mac-shortcuts.json"
+    if [ ! -f "$CATALOG_PATH" ] || ! python3 -c "import json; json.load(open('$CATALOG_PATH'))" >/dev/null 2>&1; then
+      echo "FAIL: immutable catalog missing or malformed" >&2; exit 1
     fi
-
-    # Leave the user's app in the normal live-catalog mode after verification.
-    pkill -x "$APP_NAME" >/dev/null 2>&1 || true
-    sleep 1
-    open_app
-    sleep 1
-    if pgrep -x "$APP_NAME" >/dev/null; then
-      echo "  ✓ Relaunched normal app after fallback test"
-    else
-      echo "FAIL: normal app did not relaunch after fallback test" >&2; exit 1
+    SCHEMA_VERSION=$(/usr/bin/plutil -extract schemaVersion raw -o - "$CATALOG_PATH")
+    if [ "$SCHEMA_VERSION" != "1" ]; then
+      echo "FAIL: unexpected catalog schema $SCHEMA_VERSION" >&2; exit 1
     fi
+    echo "  ✓ Immutable catalog schema = 1"
 
     echo ""
     echo "=== ✅ Verification passed ==="

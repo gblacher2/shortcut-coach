@@ -35,11 +35,11 @@ instead, then run `swift run ShortcutCoachChecks`.
   assertions that exit non-zero on failure. Keep that file updated with every behavioral change.
 - **Codesign is ad-hoc** (`--sign -`). The build script codesigns before staging the bundle
   so macOS gatekeeper does not block launch.
-- **Resource bundles.** `mac-shortcuts.json` ships as a SwiftPM process resource inside
+- **Resource bundles.** The immutable `mac-shortcuts.json` catalog ships inside
   `ShortcutCoachCore`. The build script copies both `*.bundle` directories into
   `Contents/` so `Bundle.module` resolves correctly at runtime.
-- **Auto-tracking requires Accessibility permission.** The app polls for it via a 1.5s
-  `Timer` on `RunLoop.main` and stops polling once granted.
-- **Catalog override.** Set env var `SHORTCUTCOACH_CATALOG_OVERRIDE=<path>` to point
-  the loader at a different JSON file (used by `--verify` fallback test).
+- **No permissions or monitoring.** Do not add Accessibility permission, global key
+  monitors, foreground-app detection, or automatic shortcut-use tracking.
+- **Personal state.** `UserLibraryManager` owns the atomic local JSON, one-time legacy
+  migration, recovery copy, and personal-state-only import/export contract.
 - **Bundle ID:** `com.gabrielblacher.ShortcutCoach` · **Min macOS:** 15.0

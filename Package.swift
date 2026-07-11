@@ -19,7 +19,7 @@ let package = Package(
                 .process("Resources")
             ]
         ),
-        // macOS SwiftUI menu-bar app.
+        // macOS SwiftUI windowed app with a MenuBarExtra.
         .executableTarget(
             name: "ShortcutCoach",
             dependencies: ["ShortcutCoachCore"],
