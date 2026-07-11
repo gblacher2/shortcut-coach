@@ -7,11 +7,23 @@ struct ShortcutCoachApp: App {
     @State private var store = ShortcutStore()
 
     var body: some Scene {
-        MenuBarExtra {
+        WindowGroup("Shortcut Coach", id: "main") {
             ShortcutCoachRootView(store: store)
-                .frame(width: 430, height: 560)
-        } label: {
-            Image(systemName: "command")
+                .frame(minWidth: 920, minHeight: 560)
+        }
+        .defaultSize(width: 1180, height: 720)
+        .commands {
+            CommandMenu("Library") {
+                Button("Export Personal State…") { store.exportBackup() }
+                    .keyboardShortcut("e", modifiers: [.command, .option])
+                Button("Import Personal State…") { store.importBackup() }
+                    .keyboardShortcut("i", modifiers: [.command, .option])
+            }
+        }
+
+        MenuBarExtra("Shortcut Coach", systemImage: "command.circle") {
+            MenuBarSearchView(store: store)
+                .frame(width: 380, height: 520)
         }
         .menuBarExtraStyle(.window)
     }
@@ -19,6 +31,7 @@ struct ShortcutCoachApp: App {
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.setActivationPolicy(.accessory)
+        NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }

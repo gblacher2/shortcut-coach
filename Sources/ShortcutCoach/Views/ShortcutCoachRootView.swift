@@ -1,96 +1,41 @@
-import ShortcutCoachCore
 import SwiftUI
 
 struct ShortcutCoachRootView: View {
     @Bindable var store: ShortcutStore
 
     var body: some View {
-        VStack(spacing: 0) {
-            HeaderView(store: store)
-
-            Divider()
-
-            SearchView(store: store)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Divider()
-            FooterView(store: store)
+        NavigationSplitView {
+            SidebarView(store: store, selection: $store.selectedSidebarItem)
+                .navigationSplitViewColumnWidth(min: 190, ideal: 225, max: 280)
+        } content: {
+            ResultsListView(store: store)
+                .navigationSplitViewColumnWidth(min: 360, ideal: 430, max: 560)
+        } detail: {
+            InspectorView(shortcut: store.selectedShortcut, store: store)
+                .navigationSplitViewColumnWidth(min: 330, ideal: 430)
         }
-        .task {
-            if store.shortcuts.isEmpty {
-                store.refresh()
+        .navigationSplitViewStyle(.balanced)
+        .onChange(of: store.selectedSidebarItem) { _, _ in
+            store.selectedShortcutID = store.filteredShortcuts.first?.id
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Button("Export Personal State…", systemImage: "square.and.arrow.up") { store.exportBackup() }
+                    Button("Import Personal State…", systemImage: "square.and.arrow.down") { store.importBackup() }
+                } label: {
+                    Label("Backup", systemImage: "externaldrive")
+                }
+                .help("Export or import favourites, To Learn, collections, notes, and recents")
             }
         }
-    }
-}
-
-private struct HeaderView: View {
-    @Bindable var store: ShortcutStore
-
-    var body: some View {
-        HStack(alignment: .center, spacing: 10) {
-            Image("app_logo", bundle: .module)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
-                .cornerRadius(6)
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Shortcut Coach")
-                    .font(.headline)
-                Text("Search keyboard shortcuts across macOS")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            Spacer()
-            Button {
-                store.refresh()
-            } label: {
-                Image(systemName: "arrow.clockwise")
-            }
-            .buttonStyle(.borderless)
-            .help("Refresh shortcuts")
+        .alert("Shortcut Coach", isPresented: Binding(
+            get: { store.errorMessage != nil },
+            set: { if !$0 { store.errorMessage = nil } }
+        )) {
+            Button("OK") { store.errorMessage = nil }
+        } message: {
+            Text(store.errorMessage ?? "Unknown error")
         }
-        .padding(14)
-    }
-}
-
-private struct FooterView: View {
-    @Bindable var store: ShortcutStore
-
-    var body: some View {
-        HStack(spacing: 8) {
-            Text(compactMeta)
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
-                .lineLimit(1)
-                .truncationMode(.middle)
-            Spacer(minLength: 4)
-            Button("Full Guide") {
-                store.openFullGuide()
-            }
-            .controlSize(.small)
-            .help("Open the interactive HTML guide")
-            Button("Quit") {
-                store.quit()
-            }
-            .controlSize(.small)
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 8)
-    }
-
-    private var compactMeta: String {
-        guard let catalog = store.catalog else {
-            return store.sourceDescription
-        }
-        let count = catalog.shortcuts.count
-        let timePart: String
-        if let loadedAt = store.lastLoadedAt {
-            timePart = DateFormatter.localizedString(from: loadedAt, dateStyle: .none, timeStyle: .short)
-        } else {
-            timePart = "–"
-        }
-        return "\(count) shortcuts · \(timePart)"
     }
 }
