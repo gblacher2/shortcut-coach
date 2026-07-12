@@ -43,3 +43,4 @@ instead, then run `swift run ShortcutCoachChecks`.
 - **Personal state.** `UserLibraryManager` owns the atomic local JSON, one-time legacy
   migration, recovery copy, and personal-state-only import/export contract.
 - **Bundle ID:** `com.gabrielblacher.ShortcutCoach` · **Min macOS:** 15.0
+- **Unified Models & Optionality:** Core models like `ShortcutCatalogEntry` decode both the immutable `mac-shortcuts.json` and external environments (e.g. `my-mac-environment.json`). Any newly added properties specific to one environment must be `Optional` (e.g., `[String]?` instead of `[String] = []` in the model definition) to prevent `Codable` decoding failures when parsing the other JSON sources.
