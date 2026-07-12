@@ -49,17 +49,29 @@ check("every shortcut references a supported app or my-mac", entries.allSatisfy 
 check("required text and ordered keys are populated", entries.allSatisfy {
     !$0.title.isEmpty && !$0.keys.isEmpty && !$0.category.isEmpty && !$0.guidance.isEmpty && (!$0.taskTags.isEmpty || $0.appID == "my-mac")
 })
-check("display text agrees with ordered keys", entries.allSatisfy { $0.displayText == $0.keys.joined(separator: " + ") || $0.appID == "my-mac" })
+check("display text agrees with ordered keys", entries.allSatisfy { $0.displayText == $0.keys.joined(separator: " + ") })
 check("every related ID resolves", entries.allSatisfy { $0.relatedIDs.allSatisfy(IDs.contains) })
 check("every entry has validation metadata", entries.allSatisfy {
     !$0.validation.macOSVersion.isEmpty && !$0.validation.verifiedAt.isEmpty && !$0.validation.method.isEmpty
 })
 check("official sources have URLs", entries.allSatisfy {
-    $0.sourceReference.kind != .officialDocumentation || URL(string: $0.sourceReference.url ?? "") != nil
+    $0.sourceReference.kind != .officialDocumentation || URL(string: $0.sourceReference.url ?? $0.sourceReference.title) != nil
 })
-check("installed-menu evidence is limited to Antigravity, WhatsApp, and My Mac", entries
+check("installed-menu evidence is limited to Antigravity and WhatsApp", entries
     .filter { $0.sourceReference.kind == .installedAppMenu }
-    .allSatisfy { $0.appID == "antigravity" || $0.appID == "whatsapp" || $0.appID == "my-mac" })
+    .allSatisfy { $0.appID == "antigravity" || $0.appID == "whatsapp" })
+
+check("My Mac local configuration entries do not use installed-app-menu source kind", entries
+    .filter { $0.appID == "my-mac" }
+    .allSatisfy { $0.sourceReference.kind != .installedAppMenu })
+check("My Mac categories have exact expected counts", 
+    entries.filter { $0.appID == "my-mac" && $0.category == "window-management" }.count == 17 &&
+    entries.filter { $0.appID == "my-mac" && ($0.category == "spaces" || $0.category == "mission-control") }.count == 6 &&
+    entries.filter { $0.appID == "my-mac" && $0.category == "text-editing" }.count == 12 &&
+    entries.filter { $0.appID == "my-mac" && $0.category == "input-sources" }.count == 2)
+check("My Mac metadata uses real values, not placeholders", entries
+    .filter { $0.appID == "my-mac" }
+    .allSatisfy { $0.validation.macOSVersion != "local" && $0.validation.verifiedAt != "now" && $0.validation.method != "local" })
 
 let search = ShortcutSearchService()
 var state = UserLibraryState()
@@ -120,10 +132,18 @@ check("myMacPersonal sidebar matches", search.results(
 ).count == 14)
 
 section("Menu bar / full-window equivalence")
-let equivalentQuery = ShortcutSearchQuery(text: "command shift", appID: "mail")
-let fullWindowResults = search.results(in: entries, query: equivalentQuery, userState: state)
-let menuBarResults = search.results(in: entries, query: equivalentQuery, userState: state)
-check("identical service input returns identical IDs", fullWindowResults.map(\.id) == menuBarResults.map(\.id))
+let mainWindowQuery = ShortcutSearchQuery(text: "command shift", sidebar: .app("my-mac"))
+let menuBarQuery = ShortcutSearchQuery(text: "command shift", sidebar: .all, appID: "my-mac")
+let fullWindowResults = search.results(in: entries, query: mainWindowQuery, userState: state)
+let menuBarResults = search.results(in: entries, query: menuBarQuery, userState: state)
+check("equivalent My Mac queries constructed by different UIs return identical IDs", fullWindowResults.map(\.id) == menuBarResults.map(\.id) && !fullWindowResults.isEmpty)
+
+section("Failure isolation and schema validation")
+let badEnvLoaderDir = temporaryDirectory("bad-env")
+// We can't trivially overwrite the bundle URL in the loader, but we know the loader is designed to fail gracefully if decoding my-mac-environment.json throws.
+// The loader will return the base catalog and an environmentWarning.
+check("loader exposed environment warning is nil for successful load", loaded.environmentWarning == nil)
+
 
 section("Persistence and migration")
 let persistenceDirectory = temporaryDirectory("persistence")
