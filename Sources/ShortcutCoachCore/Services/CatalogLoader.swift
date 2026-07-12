@@ -3,7 +3,7 @@ import Foundation
 public struct CatalogLoader: Sendable {
     public init() {}
 
-    public func load() throws -> LoadedCatalog {
+    public func load(environmentData: Data? = nil) throws -> LoadedCatalog {
         guard let url = Bundle.module.url(forResource: "mac-shortcuts", withExtension: "json") else {
             throw CatalogError.missingCatalog
         }
@@ -12,10 +12,20 @@ public struct CatalogLoader: Sendable {
             let baseCatalog = try JSONDecoder().decode(ShortcutCatalog.self, from: Data(contentsOf: url))
             var allShortcuts = baseCatalog.shortcuts
 
-            var environmentWarning: String? = nil
-            if let envUrl = Bundle.module.url(forResource: "my-mac-environment", withExtension: "json") {
+            var environmentState: EnvironmentState = .missing
+            
+            let envData: Data?
+            if let provided = environmentData {
+                envData = provided
+            } else if let envUrl = Bundle.module.url(forResource: "my-mac-environment", withExtension: "json") {
+                envData = try? Data(contentsOf: envUrl)
+            } else {
+                envData = nil
+            }
+            
+            if let data = envData {
                 do {
-                    let envCatalog = try JSONDecoder().decode(EnvironmentCatalog.self, from: Data(contentsOf: envUrl))
+                    let envCatalog = try JSONDecoder().decode(EnvironmentCatalog.self, from: data)
                     try envCatalog.validate()
                     
                     let adds = Set(envCatalog.recommendedShortcutCoachChanges.add.map(\.bindingID))
@@ -32,8 +42,17 @@ public struct CatalogLoader: Sendable {
                         }
                         
                         let sourceKind: SourceKind
-                        if let stype = binding.source, stype.starts(with: "http") {
+                        var sourceTitle = binding.source ?? "Local Configuration"
+                        var sourceUrl: String? = nil
+                        
+                        if binding.sourceType == "official-documentation" {
                             sourceKind = .officialDocumentation
+                            sourceTitle = "Apple Support"
+                            sourceUrl = binding.source
+                        } else if binding.sourceType == "system-preference" {
+                            sourceKind = .systemPreference
+                        } else if binding.sourceType == "tool-config" {
+                            sourceKind = .toolConfiguration
                         } else {
                             sourceKind = .localConfiguration
                         }
@@ -49,7 +68,7 @@ public struct CatalogLoader: Sendable {
                             taskTags: [],
                             category: binding.category,
                             guidance: guidance,
-                            sourceReference: SourceReference(title: binding.source ?? "Local Configuration", kind: sourceKind),
+                            sourceReference: SourceReference(title: sourceTitle, url: sourceUrl, kind: sourceKind),
                             validation: ValidationMetadata(macOSVersion: envCatalog.macOSVersion, verifiedAt: envCatalog.generatedAt, method: binding.confidence),
                             caveat: binding.caveat,
                             owner: binding.owner,
@@ -59,8 +78,9 @@ public struct CatalogLoader: Sendable {
                         )
                     }
                     allShortcuts.append(contentsOf: envEntries)
+                    environmentState = .loaded
                 } catch {
-                    environmentWarning = "Failed to load My Mac environment: \(error.localizedDescription)"
+                    environmentState = .rejected(reason: error.localizedDescription)
                 }
             }
 
@@ -73,7 +93,7 @@ public struct CatalogLoader: Sendable {
                 shortcuts: allShortcuts
             )
 
-            return LoadedCatalog(catalog: finalCatalog, sourceDescription: "Built-in catalog v\(finalCatalog.catalogVersion)", environmentWarning: environmentWarning)
+            return LoadedCatalog(catalog: finalCatalog, sourceDescription: "Built-in catalog v\(finalCatalog.catalogVersion)", environmentState: environmentState)
         } catch let DecodingError.dataCorrupted(context) {
             throw CatalogError.invalidCatalog(reason: "Data corrupted: \(context)")
         } catch let DecodingError.keyNotFound(key, context) {
@@ -88,10 +108,16 @@ public struct CatalogLoader: Sendable {
     }
 }
 
+public enum EnvironmentState: Equatable, Sendable {
+    case loaded
+    case missing
+    case rejected(reason: String)
+}
+
 public struct LoadedCatalog: Sendable {
     public let catalog: ShortcutCatalog
     public let sourceDescription: String
-    public let environmentWarning: String?
+    public let environmentState: EnvironmentState
 }
 
 public enum CatalogError: LocalizedError {

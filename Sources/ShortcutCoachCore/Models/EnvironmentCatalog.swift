@@ -34,41 +34,51 @@ public struct EnvironmentCatalog: Codable, Sendable {
                     throw CatalogError.invalidCatalog(reason: "Binding \(binding.id) references dangling conflict ID: \(cid)")
                 }
             }
-            if !binding.action.isEmpty == false || !binding.owner.isEmpty == false || !binding.category.isEmpty == false || (binding.source?.isEmpty ?? true) || binding.keys.isEmpty || binding.displayText.isEmpty || binding.output == nil || binding.confidence.isEmpty {
+            if !binding.action.isEmpty == false || !binding.owner.isEmpty == false || !binding.category.isEmpty == false || (binding.sourceType?.isEmpty ?? true) || binding.keys.isEmpty || binding.displayText.isEmpty || (binding.output?.summary.isEmpty ?? true) || binding.confidence.isEmpty {
                 throw CatalogError.invalidCatalog(reason: "Binding \(binding.id) is missing required fields")
             }
-            if binding.input == nil && binding.displayText != binding.keys.joined(separator: " + ") {
+            if binding.displayText != binding.keys.joined(separator: " + ") {
                 throw CatalogError.invalidCatalog(reason: "Binding \(binding.id) display text does not match ordered keys")
             }
         }
         
         let addIDs = recommendedShortcutCoachChanges.add.map(\.bindingID)
         let sepIDs = recommendedShortcutCoachChanges.keepSeparateFromBuiltInCatalog.map(\.bindingID)
+        let upIDs = recommendedShortcutCoachChanges.update.map(\.bindingID)
+        let omitIDs = recommendedShortcutCoachChanges.omit.map(\.bindingID)
         
-        if Set(addIDs).count != addIDs.count {
-            throw CatalogError.invalidCatalog(reason: "Duplicate recommendation IDs in add")
+        func requireUnique(_ ids: [String], name: String) throws {
+            if Set(ids).count != ids.count {
+                throw CatalogError.invalidCatalog(reason: "Duplicate recommendation IDs in \(name)")
+            }
         }
-        if Set(sepIDs).count != sepIDs.count {
-            throw CatalogError.invalidCatalog(reason: "Duplicate recommendation IDs in keepSeparateFromBuiltInCatalog")
-        }
+        try requireUnique(addIDs, name: "add")
+        try requireUnique(sepIDs, name: "keepSeparateFromBuiltInCatalog")
+        try requireUnique(upIDs, name: "update")
+        try requireUnique(omitIDs, name: "omit")
         
         let addSet = Set(addIDs)
         let sepSet = Set(sepIDs)
-        if !addSet.isDisjoint(with: sepSet) {
-            throw CatalogError.invalidCatalog(reason: "Overlapping classifications between add and keepSeparateFromBuiltInCatalog")
+        let upSet = Set(upIDs)
+        let omitSet = Set(omitIDs)
+        
+        let unionRecs = addSet.union(sepSet).union(upSet).union(omitSet)
+        let totalCount = addSet.count + sepSet.count + upSet.count + omitSet.count
+        
+        if unionRecs.count != totalCount {
+            throw CatalogError.invalidCatalog(reason: "Overlapping classifications between recommendation groups")
         }
         
         let allValidBindingIDs = Set(bindingIDs)
-        for rid in addSet.union(sepSet) {
+        for rid in unionRecs {
             if !allValidBindingIDs.contains(rid) {
                 throw CatalogError.invalidCatalog(reason: "Recommendation references dangling binding ID: \(rid)")
             }
         }
         
         let enabledBindingIDs = Set(bindings.filter(\.enabled).map(\.id))
-        let unionRecs = addSet.union(sepSet)
-        if !enabledBindingIDs.isSubset(of: unionRecs) {
-            throw CatalogError.invalidCatalog(reason: "Some enabled bindings are missing from classifications")
+        if enabledBindingIDs != unionRecs {
+            throw CatalogError.invalidCatalog(reason: "Enabled bindings must exactly match classifications coverage")
         }
     }
 }
@@ -81,6 +91,8 @@ public struct EnvironmentConflict: Codable, Sendable {
 public struct EnvironmentChanges: Codable, Sendable {
     public let add: [EnvironmentChangeRecommendation]
     public let keepSeparateFromBuiltInCatalog: [EnvironmentChangeRecommendation]
+    public let update: [EnvironmentChangeRecommendation]
+    public let omit: [EnvironmentChangeRecommendation]
 }
 
 public struct EnvironmentChangeRecommendation: Codable, Sendable {
@@ -113,4 +125,5 @@ public struct EnvironmentBinding: Codable, Identifiable, Sendable {
     public let caveat: String?
     public let conflictIDs: [String]
     public let source: String?
+    public let sourceType: String?
 }

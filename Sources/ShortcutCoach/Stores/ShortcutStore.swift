@@ -17,6 +17,7 @@ final class ShortcutStore {
     var query = ""
     var errorMessage: String?
     var statusMessage: String?
+    private(set) var environmentState: EnvironmentState = .missing
 
     private let loader: CatalogLoader
     private let libraryManager: UserLibraryManager
@@ -66,6 +67,7 @@ final class ShortcutStore {
             catalog = loaded.catalog
             shortcuts = loaded.catalog.shortcuts
             sourceDescription = loaded.sourceDescription
+            environmentState = loaded.environmentState
             errorMessage = nil
             if selectedShortcutID == nil || shortcut(withID: selectedShortcutID!) == nil {
                 selectedShortcutID = filteredShortcuts.first?.id

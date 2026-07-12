@@ -139,12 +139,27 @@ let menuBarResults = search.results(in: entries, query: menuBarQuery, userState:
 check("equivalent My Mac queries constructed by different UIs return identical IDs", fullWindowResults.map(\.id) == menuBarResults.map(\.id) && !fullWindowResults.isEmpty)
 
 section("Failure isolation and schema validation")
-let badEnvLoaderDir = temporaryDirectory("bad-env")
-// We can't trivially overwrite the bundle URL in the loader, but we know the loader is designed to fail gracefully if decoding my-mac-environment.json throws.
-// The loader will return the base catalog and an environmentWarning.
-check("loader exposed environment warning is nil for successful load", loaded.environmentWarning == nil)
+check("loader exposed environment state is loaded for successful load", loaded.environmentState == .loaded)
 
+let emptyCatalogData = Data()
+do {
+    let loader = CatalogLoader()
+    let missingEnv = try loader.load(environmentData: emptyCatalogData)
+    if case .rejected(_) = missingEnv.environmentState {
+        check("malformed JSON is explicitly rejected without crashing", true)
+        check("malformed load preserves exactly 56 base catalog items", missingEnv.catalog.shortcuts.count == 56)
+    } else {
+        check("malformed JSON is explicitly rejected without crashing", false)
+    }
+} catch {
+    check("malformed JSON is explicitly rejected without crashing", false)
+}
 
+// Ensure My Mac search scopes compose correctly
+check("My Mac text + app scope composition", search.results(in: entries, query: ShortcutSearchQuery(text: "mission control", sidebar: .app("my-mac")), userState: state).count > 0)
+check("My Mac text + myMacSystem composition", search.results(in: entries, query: ShortcutSearchQuery(text: "Select", sidebar: .myMacSystem), userState: state).count > 0)
+check("My Mac text + category composition", search.results(in: entries, query: ShortcutSearchQuery(text: "left", sidebar: .category("window-management")), userState: state).count > 0)
+check("My Mac text + myMacPersonal composition", search.results(in: entries, query: ShortcutSearchQuery(text: "Snap", sidebar: .myMacPersonal), userState: state).count > 0)
 section("Persistence and migration")
 let persistenceDirectory = temporaryDirectory("persistence")
 let stateURL = persistenceDirectory.appendingPathComponent("UserLibraryState.json")

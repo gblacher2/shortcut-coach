@@ -11,6 +11,8 @@ public enum SourceKind: String, Codable, Sendable {
     case officialDocumentation = "official-documentation"
     case installedAppMenu = "installed-app-menu"
     case localConfiguration = "local-configuration"
+    case systemPreference = "system-preference"
+    case toolConfiguration = "tool-config"
 }
 
 public struct SourceReference: Codable, Equatable, Hashable, Sendable {

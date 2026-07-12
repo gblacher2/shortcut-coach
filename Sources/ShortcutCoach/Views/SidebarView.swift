@@ -17,13 +17,23 @@ struct SidebarView: View {
             }
 
             Section("My Mac") {
-                sidebarRow("All My Mac Shortcuts", symbol: "macbook", value: .app("my-mac"))
-                sidebarRow("macOS System", symbol: "applelogo", value: .myMacSystem)
-                sidebarRow("Personal Setup", symbol: "person.crop.circle", value: .myMacPersonal)
-                sidebarRow("Window Management", symbol: "macwindow", value: .category("window-management"))
-                sidebarRow("Spaces & Mission Control", symbol: "square.grid.3x3", value: .category("spaces-mission-control"))
-                sidebarRow("Text Editing", symbol: "character.cursor.ibeam", value: .category("text-editing"))
-                sidebarRow("Input Sources", symbol: "keyboard", value: .category("input-sources"))
+                if store.environmentState == .loaded {
+                    sidebarRow("All My Mac Shortcuts", symbol: "macbook", value: .app("my-mac"))
+                    sidebarRow("macOS System", symbol: "applelogo", value: .myMacSystem)
+                    sidebarRow("Personal Setup", symbol: "person.crop.circle", value: .myMacPersonal)
+                    sidebarRow("Window Management", symbol: "macwindow", value: .category("window-management"))
+                    sidebarRow("Spaces & Mission Control", symbol: "square.grid.3x3", value: .category("spaces-mission-control"))
+                    sidebarRow("Text Editing", symbol: "character.cursor.ibeam", value: .category("text-editing"))
+                    sidebarRow("Input Sources", symbol: "keyboard", value: .category("input-sources"))
+                } else {
+                    let msg = store.environmentState == .missing ? "My Mac overlay missing" : "My Mac overlay rejected"
+                    Text(msg)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .accessibilityLabel("\(msg). The nine-app library remains available.")
+                        .accessibilityHint("Check environment configuration")
+                        .padding(.vertical, 4)
+                }
             }
 
             Section("Apps") {
