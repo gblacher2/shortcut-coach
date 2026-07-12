@@ -61,7 +61,12 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
     public let owner: String?
     public let conflictIDs: [String]?
     public let defaultStatus: String?
+    public let environmentClassification: EnvironmentClassification?
+    public let environmentConfidence: String?
     public let outputSummary: String?
+    public let outputType: String?
+    public let outputKeys: [String]?
+    public let environmentScope: String?
 
     enum CodingKeys: String, CodingKey {
         case id, title, keys, category, guidance, stability, caveat
@@ -72,7 +77,8 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         case relatedIDs
         case sourceReference = "source"
         case validation
-        case owner, conflictIDs, defaultStatus, outputSummary
+        case owner, conflictIDs, defaultStatus, environmentClassification, environmentConfidence
+        case outputSummary, outputType, outputKeys, environmentScope
     }
 
     public init(
@@ -93,7 +99,12 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         owner: String? = nil,
         conflictIDs: [String]? = nil,
         defaultStatus: String? = nil,
-        outputSummary: String? = nil
+        environmentClassification: EnvironmentClassification? = nil,
+        environmentConfidence: String? = nil,
+        outputSummary: String? = nil,
+        outputType: String? = nil,
+        outputKeys: [String]? = nil,
+        environmentScope: String? = nil
     ) {
         self.id = id
         self.appID = appID
@@ -112,7 +123,12 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         self.owner = owner
         self.conflictIDs = conflictIDs
         self.defaultStatus = defaultStatus
+        self.environmentClassification = environmentClassification
+        self.environmentConfidence = environmentConfidence
         self.outputSummary = outputSummary
+        self.outputType = outputType
+        self.outputKeys = outputKeys
+        self.environmentScope = environmentScope
     }
 
     public var appName: String {
@@ -120,12 +136,16 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
     }
 
     public var searchableText: String {
-        ([title, appName, displayText, category, guidance]
+        ([title, appName, displayText, category, guidance, sourceReference.title, sourceReference.kind.rawValue,
+          validation.macOSVersion, validation.verifiedAt, validation.method, stability.rawValue]
             + keys
             + taskTags
             + (menuPath ?? [])
-            + [sourceReference.title]
-            + [caveat, owner, outputSummary].compactMap { $0 })
+            + (outputKeys ?? [])
+            + [sourceReference.url, caveat, owner, outputSummary, outputType, environmentScope, defaultStatus,
+               environmentClassification?.rawValue, environmentConfidence]
+                .compactMap { $0 }
+            + (conflictIDs ?? []))
             .joined(separator: " ")
     }
 

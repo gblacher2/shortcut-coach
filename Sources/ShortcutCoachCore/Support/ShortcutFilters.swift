@@ -28,10 +28,19 @@ public struct ShortcutSearchService: Sendable {
         case .favourites: filtered.removeAll { !userState.favourites.contains($0.id) }
         case .toLearn: filtered.removeAll { !userState.toLearn.contains($0.id) }
         case .recentlyViewed:
-            let order = Dictionary(uniqueKeysWithValues: userState.recents.enumerated().map { ($1, $0) })
-            filtered = filtered.filter { order[$0.id] != nil }.sorted { order[$0.id]! < order[$1.id]! }
-        case .myMacSystem: filtered.removeAll { $0.defaultStatus != "add" }
-        case .myMacPersonal: filtered.removeAll { $0.defaultStatus != "keepSeparateFromBuiltInCatalog" }
+            // Persistence rejects duplicate recents, but filtering remains safe if
+            // older or externally edited state reaches this layer. The first
+            // occurrence is the authoritative recency position.
+            var order: [String: Int] = [:]
+            for (index, id) in userState.recents.enumerated() where order[id] == nil {
+                order[id] = index
+            }
+            filtered = filtered
+                .filter { order[$0.id] != nil }
+                .sorted { order[$0.id, default: .max] < order[$1.id, default: .max] }
+        case .myMacSystem: filtered.removeAll { $0.environmentClassification != .add }
+        case .myMacPersonal:
+            filtered.removeAll { $0.environmentClassification != .keepSeparateFromBuiltInCatalog }
         case let .app(appID): filtered.removeAll { $0.appID != appID }
         case let .tag(tag): filtered.removeAll { !$0.taskTags.contains(tag) }
         case let .category(cat): 
