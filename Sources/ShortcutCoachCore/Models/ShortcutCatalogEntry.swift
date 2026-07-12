@@ -53,6 +53,12 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
     public let validation: ValidationMetadata
     public let stability: EntryStability
     public let caveat: String?
+    
+    // Environment layer extensions
+    public let owner: String?
+    public let conflictIDs: [String]?
+    public let defaultStatus: String?
+    public let outputSummary: String?
 
     enum CodingKeys: String, CodingKey {
         case id, title, keys, category, guidance, stability, caveat
@@ -63,6 +69,7 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         case relatedIDs
         case sourceReference = "source"
         case validation
+        case owner, conflictIDs, defaultStatus, outputSummary
     }
 
     public init(
@@ -79,7 +86,11 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         sourceReference: SourceReference,
         validation: ValidationMetadata,
         stability: EntryStability = .stable,
-        caveat: String? = nil
+        caveat: String? = nil,
+        owner: String? = nil,
+        conflictIDs: [String]? = nil,
+        defaultStatus: String? = nil,
+        outputSummary: String? = nil
     ) {
         self.id = id
         self.appID = appID
@@ -95,6 +106,10 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
         self.validation = validation
         self.stability = stability
         self.caveat = caveat
+        self.owner = owner
+        self.conflictIDs = conflictIDs
+        self.defaultStatus = defaultStatus
+        self.outputSummary = outputSummary
     }
 
     public var appName: String {
@@ -107,7 +122,7 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
             + taskTags
             + (menuPath ?? [])
             + [sourceReference.title]
-            + [caveat].compactMap { $0 })
+            + [caveat, owner, outputSummary].compactMap { $0 })
             .joined(separator: " ")
     }
 

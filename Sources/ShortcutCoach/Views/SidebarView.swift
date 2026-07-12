@@ -16,6 +16,16 @@ struct SidebarView: View {
                 sidebarRow("Recently Viewed", symbol: "clock", value: .recentlyViewed)
             }
 
+            Section("My Mac") {
+                sidebarRow("All My Mac Shortcuts", symbol: "macbook", value: .app("my-mac"))
+                sidebarRow("macOS System", symbol: "applelogo", value: .myMacSystem)
+                sidebarRow("Personal Setup", symbol: "person.crop.circle", value: .myMacPersonal)
+                sidebarRow("Window Management", symbol: "macwindow", value: .category("window-management"))
+                sidebarRow("Spaces & Mission Control", symbol: "square.grid.3x3", value: .category("spaces-mission-control"))
+                sidebarRow("Text Editing", symbol: "character.cursor.ibeam", value: .category("text-editing"))
+                sidebarRow("Input Sources", symbol: "keyboard", value: .category("input-sources"))
+            }
+
             Section("Apps") {
                 ForEach(store.apps) { app in
                     sidebarRow(app.name, symbol: app.symbolName, value: .app(app.id))

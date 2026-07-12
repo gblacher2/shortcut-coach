@@ -30,8 +30,11 @@ public struct ShortcutSearchService: Sendable {
         case .recentlyViewed:
             let order = Dictionary(uniqueKeysWithValues: userState.recents.enumerated().map { ($1, $0) })
             filtered = filtered.filter { order[$0.id] != nil }.sorted { order[$0.id]! < order[$1.id]! }
+        case .myMacSystem: filtered.removeAll { $0.defaultStatus != "add" }
+        case .myMacPersonal: filtered.removeAll { $0.defaultStatus != "keepSeparateFromBuiltInCatalog" }
         case let .app(appID): filtered.removeAll { $0.appID != appID }
         case let .tag(tag): filtered.removeAll { !$0.taskTags.contains(tag) }
+        case let .category(cat): filtered.removeAll { $0.category != cat }
         case let .collection(collectionID):
             let IDs = userState.collections[collectionID]?.shortcutIDs ?? []
             filtered.removeAll { !IDs.contains($0.id) }

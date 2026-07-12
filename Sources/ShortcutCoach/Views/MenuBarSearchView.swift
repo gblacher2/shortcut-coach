@@ -11,12 +11,14 @@ struct MenuBarSearchView: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 10) {
-                Picker("App", selection: $selectedAppID) {
-                    Text("All Apps").tag(String?.none)
+                Picker("Scope", selection: $selectedAppID) {
+                    Text("Everything").tag(String?.none)
+                    Text("My Mac").tag(Optional("my-mac"))
+                    Divider()
                     ForEach(store.apps) { app in Text(app.name).tag(Optional(app.id)) }
                 }
                 .pickerStyle(.menu)
-                .accessibilityLabel("Manual app filter")
+                .accessibilityLabel("Manual scope filter")
 
                 TextField("Search shortcuts", text: $query)
                     .textFieldStyle(.roundedBorder)
@@ -95,7 +97,7 @@ struct MenuBarSearchView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(CoachFormatters.shortAction(shortcut.title))
                                 .lineLimit(1)
-                            Text(shortcut.appName)
+                            Text(shortcut.owner ?? shortcut.appName)
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
                         }

@@ -40,8 +40,11 @@ struct ResultsListView: View {
         case .favourites: "Favourites"
         case .toLearn: "To Learn"
         case .recentlyViewed: "Recently Viewed"
-        case let .app(id): store.apps.first(where: { $0.id == id })?.name ?? "App"
+        case .myMacSystem: "macOS System"
+        case .myMacPersonal: "Personal Setup"
+        case let .app(id): store.apps.first(where: { $0.id == id })?.name ?? (id == "my-mac" ? "All My Mac Shortcuts" : "App")
         case let .tag(tag): tag
+        case let .category(cat): cat.replacingOccurrences(of: "-", with: " ").capitalized
         case let .collection(id): store.userState.collections[id]?.name ?? "Collection"
         }
     }
@@ -61,7 +64,7 @@ private struct ResultRowView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(shortcut.title)
                     .lineLimit(1)
-                Text("\(shortcut.appName) · \(shortcut.category)")
+                Text(shortcut.owner != nil ? "\(shortcut.owner!) · \(shortcut.category)" : "\(shortcut.appName) · \(shortcut.category)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -79,7 +82,7 @@ private struct ResultRowView: View {
         .padding(.vertical, 3)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(shortcut.appName), \(shortcut.title), \(shortcut.displayText)")
+        .accessibilityLabel("\(shortcut.owner ?? shortcut.appName), \(shortcut.title), \(shortcut.displayText)")
     }
 }
 

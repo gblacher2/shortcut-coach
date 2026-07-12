@@ -35,15 +35,21 @@ check("schema version is 1", catalog.schemaVersion == 1)
 check("catalog version is populated", !catalog.catalogVersion.isEmpty)
 check("exactly nine supported apps", catalog.apps.count == 9 && appIDs == Set(SupportedApp.launchApps.map(\.id)))
 check("shortcut IDs are unique", IDs.count == entries.count)
-check("catalog contains 56 curated shortcuts", entries.count == 56)
+check("catalog contains 56 curated shortcuts plus 37 My Mac", entries.count == 93)
+
+let myMacEntries = entries.filter { $0.appID == "my-mac" }
+check("exactly 37 My Mac entries loaded", myMacEntries.count == 37)
+check("macOS System (add) classification has 23 records", myMacEntries.filter { $0.defaultStatus == "add" }.count == 23)
+check("Personal Setup (keepSeparate) classification has 14 records", myMacEntries.filter { $0.defaultStatus == "keepSeparateFromBuiltInCatalog" }.count == 14)
+
 check("every app has 5–8 shortcuts", catalog.apps.allSatisfy { app in
     (5...8).contains(entries.filter { $0.appID == app.id }.count)
 })
-check("every shortcut references a supported app", entries.allSatisfy { appIDs.contains($0.appID) })
+check("every shortcut references a supported app or my-mac", entries.allSatisfy { appIDs.contains($0.appID) || $0.appID == "my-mac" })
 check("required text and ordered keys are populated", entries.allSatisfy {
-    !$0.title.isEmpty && !$0.keys.isEmpty && !$0.category.isEmpty && !$0.guidance.isEmpty && !$0.taskTags.isEmpty
+    !$0.title.isEmpty && !$0.keys.isEmpty && !$0.category.isEmpty && !$0.guidance.isEmpty && (!$0.taskTags.isEmpty || $0.appID == "my-mac")
 })
-check("display text agrees with ordered keys", entries.allSatisfy { $0.displayText == $0.keys.joined(separator: " + ") })
+check("display text agrees with ordered keys", entries.allSatisfy { $0.displayText == $0.keys.joined(separator: " + ") || $0.appID == "my-mac" })
 check("every related ID resolves", entries.allSatisfy { $0.relatedIDs.allSatisfy(IDs.contains) })
 check("every entry has validation metadata", entries.allSatisfy {
     !$0.validation.macOSVersion.isEmpty && !$0.validation.verifiedAt.isEmpty && !$0.validation.method.isEmpty
@@ -51,9 +57,9 @@ check("every entry has validation metadata", entries.allSatisfy {
 check("official sources have URLs", entries.allSatisfy {
     $0.sourceReference.kind != .officialDocumentation || URL(string: $0.sourceReference.url ?? "") != nil
 })
-check("installed-menu evidence is limited to Antigravity and WhatsApp", entries
+check("installed-menu evidence is limited to Antigravity, WhatsApp, and My Mac", entries
     .filter { $0.sourceReference.kind == .installedAppMenu }
-    .allSatisfy { $0.appID == "antigravity" || $0.appID == "whatsapp" })
+    .allSatisfy { $0.appID == "antigravity" || $0.appID == "whatsapp" || $0.appID == "my-mac" })
 
 let search = ShortcutSearchService()
 var state = UserLibraryState()
@@ -102,6 +108,16 @@ check("recents preserve view order", search.results(
     query: ShortcutSearchQuery(sidebar: .recentlyViewed),
     userState: state
 ).map(\.id) == ["mail.reply", "chrome.reopen-tab"])
+check("myMacSystem sidebar matches", search.results(
+    in: entries,
+    query: ShortcutSearchQuery(sidebar: .myMacSystem),
+    userState: state
+).count == 23)
+check("myMacPersonal sidebar matches", search.results(
+    in: entries,
+    query: ShortcutSearchQuery(sidebar: .myMacPersonal),
+    userState: state
+).count == 14)
 
 section("Menu bar / full-window equivalence")
 let equivalentQuery = ShortcutSearchQuery(text: "command shift", appID: "mail")

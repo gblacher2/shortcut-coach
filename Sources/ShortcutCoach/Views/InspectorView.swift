@@ -27,6 +27,12 @@ struct InspectorView: View {
                         }
                     }
 
+                    if let output = shortcut.outputSummary {
+                        inspectorSection("Output") {
+                            Text(output)
+                        }
+                    }
+
                     if !shortcut.relatedIDs.isEmpty {
                         inspectorSection("Related shortcuts") {
                             VStack(alignment: .leading, spacing: 6) {
@@ -61,6 +67,17 @@ struct InspectorView: View {
                             .background(.quaternary, in: RoundedRectangle(cornerRadius: 10))
                     }
 
+                    if let conflictIDs = shortcut.conflictIDs, !conflictIDs.isEmpty {
+                        ForEach(conflictIDs, id: \.self) { conflictSummary in
+                            Label("Conflict/Interception warning: \(conflictSummary)", systemImage: "exclamationmark.octagon.fill")
+                                .font(.callout)
+                                .foregroundStyle(.white)
+                                .padding(12)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(.red, in: RoundedRectangle(cornerRadius: 10))
+                        }
+                    }
+
                     verificationSection(shortcut)
                 }
                 .padding(24)
@@ -80,7 +97,7 @@ struct InspectorView: View {
 
     private func header(_ shortcut: ShortcutCatalogEntry) -> some View {
         VStack(alignment: .leading, spacing: 7) {
-            Label(shortcut.appName, systemImage: SupportedApp.app(withID: shortcut.appID)?.symbolName ?? "macwindow")
+            Label(shortcut.owner ?? shortcut.appName, systemImage: shortcut.owner != nil ? "desktopcomputer" : (SupportedApp.app(withID: shortcut.appID)?.symbolName ?? "macwindow"))
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
             Text(shortcut.title)
