@@ -36,11 +36,11 @@ instead, then run `swift run ShortcutCoachChecks`.
 - **Codesign is ad-hoc** (`--sign -`). The build script codesigns before staging the bundle
   so macOS gatekeeper does not block launch.
 - **Resource bundles.** The immutable `mac-shortcuts.json` catalog ships inside
-  `ShortcutCoachCore`. The build script copies both `*.bundle` directories into
-  `Contents/` so `Bundle.module` resolves correctly at runtime.
+  `ShortcutCoachCore`. The build script stages both `*.bundle` directories in
+  `Contents/Resources` so `Bundle.module` resolves correctly at runtime.
 - **No permissions or monitoring.** Do not add Accessibility permission, global key
   monitors, foreground-app detection, or automatic shortcut-use tracking.
 - **Personal state.** `UserLibraryManager` owns the atomic local JSON, one-time legacy
   migration, recovery copy, and personal-state-only import/export contract.
 - **Bundle ID:** `com.gabrielblacher.ShortcutCoach` · **Min macOS:** 15.0
-- **Unified Models & Optionality:** Core models like `ShortcutCatalogEntry` decode both the immutable `mac-shortcuts.json` and external environments (e.g. `my-mac-environment.json`). Any newly added properties specific to one environment must be `Optional` (e.g., `[String]?` instead of `[String] = []` in the model definition) to prevent `Codable` decoding failures when parsing the other JSON sources.
+- **Unified runtime models.** `ShortcutCatalogEntry` decodes the immutable app catalog and also represents entries mapped from the separately decoded My Mac environment. Presentation fields that are absent from `mac-shortcuts.json` must remain backward-decodable (normally optional, or handled explicitly in a custom decoder) so existing catalog data continues to load.

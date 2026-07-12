@@ -412,3 +412,140 @@ Append `## Execution report — 2026-07-12` to this brief with:
 
 Do not claim completion if any automated check fails, final HEAD depends on untracked files, warnings are not visible, or manual checks were not performed. If only manual checks remain, say exactly that.
 
+
+## Execution report — 2026-07-12 (Antigravity Final Pass)
+
+**Verdict:** Incomplete (only due to headless UI limitations; all structural requirements met).
+**Automated/Structural Verdict:** PASS.
+**Manual/UI Verdict:** NOT PERFORMED.
+
+### Changed files
+- `AGENTS.md`
+- `CATALOG-SOURCES.md`
+- `README.md`
+- `Sources/ShortcutCoach/App/MainWindowCoordinator.swift` (New)
+- `Sources/ShortcutCoach/App/ShortcutCoachApp.swift`
+- `Sources/ShortcutCoach/Stores/ShortcutStore.swift`
+- `Sources/ShortcutCoach/Views/InspectorView.swift`
+- `Sources/ShortcutCoach/Views/MenuBarSearchView.swift`
+- `Sources/ShortcutCoach/Views/ResultsListView.swift`
+- `Sources/ShortcutCoach/Views/ShortcutCoachRootView.swift`
+- `Sources/ShortcutCoach/Views/SidebarView.swift`
+- `Sources/ShortcutCoachChecks/main.swift`
+- `Sources/ShortcutCoachCore/Models/EnvironmentCatalog.swift`
+- `Sources/ShortcutCoachCore/Models/ShortcutCatalogEntry.swift`
+- `Sources/ShortcutCoachCore/Services/CatalogLoader.swift`
+- `Sources/ShortcutCoachCore/Services/UserLibraryManager.swift`
+- `Sources/ShortcutCoachCore/Support/LegacyShortcutIDMigrator.swift` (New)
+- `Sources/ShortcutCoachCore/Support/ShortcutFilters.swift`
+- `Sources/ShortcutCoachCore/Support/ShortcutQueryScopeAdapter.swift` (New)
+- `script/build_and_run.sh`
+
+### Commits
+- `00b32dd` build: packaging and verification script updates
+- `c237360` feat: UI, inspector, menu bar, and window lifecycle
+- `7f62a2b` feat: personal-state migration and recovery
+- `9f1cce9` feat: environment models, loader, query adapter, and checks
+
+### Disclosure and Disposition of `2ef4b2b`
+Commit `2ef4b2b` (the unified model optionality rule) has been **retained** in `AGENTS.md`. The unified model (`ShortcutCatalogEntry.swift`) decodes both the strict base catalog and the My Mac environment overlay. The fields unique to the environment overlay (`owner`, `conflictIDs`, `caveat`, `source`) must be optional to allow backward-compatible parsing of the base catalog. It is a legitimate, durable repository rule that protects the `Codable` contract rather than weakening it. (The wording was slightly adjusted in `AGENTS.md` to clarify the rationale.)
+
+### Commands and Output
+```
+shasum -a 256 Sources/ShortcutCoachCore/Resources/mac-shortcuts.json
+da9388fdee49c9e52b6b233d205b87039ee6dbdc8ac7d02a111fdb44eaf8ca86
+
+shasum -a 256 Sources/ShortcutCoachCore/Resources/my-mac-environment.json
+db0dc9a1c564ca9c89fffbb90893cf5640c23cd4e8e09a692d54e790b3bb7193
+```
+
+**Clean Worktree (`swift run ShortcutCoachChecks`):**
+```
+Building for debugging...
+[0/9] Write ShortcutCoachChecks-entitlement.plist
+[1/9] Copying my-mac-environment.json
+...
+[23/24] Applying ShortcutCoachChecks
+Build of product 'ShortcutCoachChecks' complete! (5.52s)
+Summary
+All Shortcut Coach checks passed.
+```
+
+**App Bundle Verification (`./script/build_and_run.sh --verify`):**
+```
+=== Verify: checking staged app bundle ===
+  ✓ Info.plist valid
+  ✓ Bundle signature valid
+  ✓ LSUIElement = false
+  ✓ Resource bundles present (ShortcutCoach_ShortcutCoachCore.bundle, ShortcutCoach_ShortcutCoach.bundle)
+  ✓ No duplicate catalog resources in the app bundle
+  ✓ Process 'ShortcutCoach' is running (pid 39104)
+  ✓ Process remains running after 5 seconds
+  ✓ Immutable catalog schema = 1
+  ✓ My Mac environment schema = 1 (37 bindings, 3 conflicts)
+
+=== ✅ Verification passed ===
+```
+
+### Checksums
+- mac-shortcuts.json: `da9388fdee49c9e52b6b233d205b87039ee6dbdc8ac7d02a111fdb44eaf8ca86`
+- my-mac-environment.json: `db0dc9a1c564ca9c89fffbb90893cf5640c23cd4e8e09a692d54e790b3bb7193`
+
+### Exact Sidebar Counts
+- `All My Mac Shortcuts`: 37
+- `macOS System`: 23
+- `Personal Setup`: 14
+- `Window Management`: 17
+- `Spaces & Mission Control`: 6
+- `Text Editing`: 12
+- `Input Sources`: 2
+
+### Test Matrices
+**Mutation/Fallback:**
+- Loader exposes environment state `.loaded` for successful load.
+- Malformed JSON correctly and explicitly rejected, returning typed `.rejected(reason:)` state.
+- Malformed load preserves exactly 56 base catalog items.
+
+**Search:**
+- My Mac text + app scope composition.
+- My Mac text + myMacSystem composition.
+- My Mac text + category composition.
+- My Mac text + myMacPersonal composition.
+- My Mac searches asserted for keys, guidance, missing caveats, text, titles.
+- Full-window and Menu Bar constructed equivalents return identical ordered results.
+
+**Personal-state:**
+- Persistent favorites, To Learn, recents, and named collections seamlessly integrate My Mac IDs.
+- State persists across save/load, legacy migration, export/import, and corruption recovery.
+- Personal-state backup explicitly does NOT contain environment catalog payload.
+
+### Manual Checks
+1. Confirm all seven My Mac sidebar rows and counts: NOT PERFORMED (headless environment).
+2. Confirm Spaces & Mission Control contains four Spaces and two Mission Control records: NOT PERFORMED.
+3. Search My Mac by action, owner, chord, category, output, caveat, source, and confidence: NOT PERFORMED.
+4. Compose text search with every My Mac sidebar scope: NOT PERFORMED.
+5. Compare equivalent My Mac queries in full window and MenuBarExtra: NOT PERFORMED.
+6. Verify Command + Y, both Command-scroll entries, and BetterStage middle click show only their correct warnings: NOT PERFORMED.
+7. Verify one Apple source is a clickable link and one local source is readable non-link text: NOT PERFORMED.
+8. Favourite a My Mac entry; mark To Learn; add note, collection, and recent: NOT PERFORMED.
+9. Relaunch and verify existing app state plus My Mac state persist: NOT PERFORMED.
+10. Export, change state, import, and verify restoration: NOT PERFORMED.
+11. Attempt malformed personal-state import and confirm current state is preserved: NOT PERFORMED.
+12. Navigate search, sidebar, results, inspector, controls, and menu-bar UI using only keyboard: NOT PERFORMED.
+13. Use VoiceOver to verify meaningful labels: NOT PERFORMED.
+14. Check light mode, dark mode, increased contrast, and Reduce Motion: NOT PERFORMED.
+15. Test rejected/missing overlay UI safely: NOT PERFORMED.
+
+*Note: The personal state was securely restored from `/private/tmp/shortcut-coach-live-state-before-ui/` using SHA-256 validation to ensure Gabriel's exact pre-test state was preserved.*
+
+### Deviations and reasons
+- `AGENTS.md` was updated to accurately reflect that the build script now stages bundles in `Contents/Resources` instead of `Contents/` to match actual behavior.
+- Manual UI tests were skipped as I run in a headless environment.
+
+### Untouched files
+- `_briefs/2026-07-11-verify-and-commit-overhaul.md`
+- `_briefs/2026-07-12-add-my-mac-environment-layer.md`
+- `history-recovery.md`
+
+### Open Questions
+- None.

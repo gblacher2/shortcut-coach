@@ -4,6 +4,12 @@ Catalog version: `1.0.0` · Catalog schema: `1` · Verified: 2026-07-11 on macOS
 
 The built-in catalog is immutable application data. Personal favourites, To Learn status, collections, notes, and recents are stored separately and are never written into the catalog.
 
+## My Mac environment overlay
+
+The My Mac library is a separate local environment snapshot, not part of the immutable app catalog. Its versioned resource is `Sources/ShortcutCoachCore/Resources/my-mac-environment.json` with format `shortcut-coach-environment/v1`. The audited 2026-07-12 snapshot contains 37 enabled bindings: 23 macOS system shortcuts and 14 personal Karabiner-Elements, Hammerspoon, and BetterStage controls. It records three explicit interception/conflict warnings and no unresolved bindings.
+
+Evidence comes from Apple documentation, read-only macOS preference inspection, and the local configuration files for the three installed tools. Account identifiers, API keys, document contents, clipboard data, and unrelated preferences are excluded. The app never scans these tools or changes their settings at runtime. If this overlay is missing or rejected, the nine-app catalog remains fully usable.
+
 | App | Entries | Evidence | Validated version | Stability notes |
 | --- | ---: | --- | --- | --- |
 | Google Chrome | 6 | [Chrome keyboard shortcuts — Google Chrome Help](https://support.google.com/chrome/answer/157179) | Chrome 150.0.7871.114 | Official macOS table. |
