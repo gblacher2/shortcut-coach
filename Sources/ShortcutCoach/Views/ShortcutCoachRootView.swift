@@ -16,7 +16,9 @@ struct ShortcutCoachRootView: View {
         }
         .navigationSplitViewStyle(.balanced)
         .onChange(of: store.selectedSidebarItem) { _, _ in
-            store.selectedShortcutID = store.filteredShortcuts.first?.id
+            // Preserve a shortcut opened from MenuBarExtra when moving back to
+            // All Shortcuts. Only replace selections that are outside the new scope.
+            store.reconcileSelectedShortcut()
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -36,6 +38,14 @@ struct ShortcutCoachRootView: View {
             Button("OK") { store.errorMessage = nil }
         } message: {
             Text(store.errorMessage ?? "Unknown error")
+        }
+        .alert("Shortcut Coach", isPresented: Binding(
+            get: { store.statusMessage != nil },
+            set: { if !$0 { store.statusMessage = nil } }
+        )) {
+            Button("OK") { store.statusMessage = nil }
+        } message: {
+            Text(store.statusMessage ?? "Operation completed.")
         }
     }
 }

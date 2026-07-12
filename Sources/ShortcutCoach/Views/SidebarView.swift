@@ -17,22 +17,21 @@ struct SidebarView: View {
             }
 
             Section("My Mac") {
-                if store.environmentState == .loaded {
+                if let notice = store.environmentNotice {
+                    environmentNotice(notice)
+                } else {
                     sidebarRow("All My Mac Shortcuts", symbol: "macbook", value: .app("my-mac"))
                     sidebarRow("macOS System", symbol: "applelogo", value: .myMacSystem)
                     sidebarRow("Personal Setup", symbol: "person.crop.circle", value: .myMacPersonal)
                     sidebarRow("Window Management", symbol: "macwindow", value: .category("window-management"))
-                    sidebarRow("Spaces & Mission Control", symbol: "square.grid.3x3", value: .category("spaces-mission-control"))
+                    sidebarRow(
+                        "Spaces & Mission Control",
+                        symbol: "square.grid.3x3",
+                        value: .category("spaces-mission-control"),
+                        hint: "Shows both Spaces and Mission Control shortcuts"
+                    )
                     sidebarRow("Text Editing", symbol: "character.cursor.ibeam", value: .category("text-editing"))
                     sidebarRow("Input Sources", symbol: "keyboard", value: .category("input-sources"))
-                } else {
-                    let msg = store.environmentState == .missing ? "My Mac overlay missing" : "My Mac overlay rejected"
-                    Text(msg)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .accessibilityLabel("\(msg). The nine-app library remains available.")
-                        .accessibilityHint("Check environment configuration")
-                        .padding(.vertical, 4)
                 }
             }
 
@@ -84,9 +83,36 @@ struct SidebarView: View {
         }
     }
 
-    private func sidebarRow(_ title: String, symbol: String, value: SidebarSelection) -> some View {
+    private func sidebarRow(
+        _ title: String,
+        symbol: String,
+        value: SidebarSelection,
+        hint: String? = nil
+    ) -> some View {
         Label(title, systemImage: symbol)
             .tag(value)
             .accessibilityLabel(title)
+            .accessibilityHint(hint ?? "Shows \(title.lowercased())")
+    }
+
+    private func environmentNotice(_ notice: EnvironmentAvailabilityNotice) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.orange)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(notice.title)
+                    .font(.callout.weight(.medium))
+                Text(notice.detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(notice.title). \(notice.detail)")
+        .accessibilityHint("The built-in app shortcuts remain searchable")
     }
 }

@@ -4,25 +4,40 @@ import SwiftUI
 
 struct MenuBarSearchView: View {
     @Bindable var store: ShortcutStore
-    @Environment(\.openWindow) private var openWindow
     @State private var query = ""
     @State private var selectedAppID: String?
+    @FocusState private var searchFocused: Bool
 
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 10) {
                 Picker("Scope", selection: $selectedAppID) {
                     Text("Everything").tag(String?.none)
-                    Text("My Mac").tag(Optional("my-mac"))
+                    if store.environmentState == .loaded {
+                        Text("My Mac").tag(Optional(ShortcutQueryScopeAdapter.myMacAppID))
+                    }
                     Divider()
                     ForEach(store.apps) { app in Text(app.name).tag(Optional(app.id)) }
                 }
                 .pickerStyle(.menu)
-                .accessibilityLabel("Manual scope filter")
+                .accessibilityLabel("Shortcut scope")
+                .accessibilityHint("Choose Everything, My Mac, or one supported app")
 
                 TextField("Search shortcuts", text: $query)
                     .textFieldStyle(.roundedBorder)
-                    .accessibilityHint("Matches actions, apps, keys, menu paths, categories, and guidance")
+                    .focused($searchFocused)
+                    .accessibilityLabel("Search shortcuts")
+                    .accessibilityHint("Matches actions, apps, keys, outputs, sources, categories, and guidance")
+
+                if let notice = store.environmentNotice {
+                    Label("My Mac unavailable; apps work", systemImage: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .help(notice.detail)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel("\(notice.title). \(notice.detail)")
+                }
             }
             .padding(12)
 
@@ -66,18 +81,29 @@ struct MenuBarSearchView: View {
             .keyboardShortcut("o", modifiers: .command)
         }
         .background(.regularMaterial)
+        .task { searchFocused = true }
+        .onKeyPress(.escape, phases: .down) { _ in
+            guard !query.isEmpty else { return .ignored }
+            query = ""
+            return .handled
+        }
+        .onChange(of: store.environmentState) { _, state in
+            if state != .loaded, selectedAppID == ShortcutQueryScopeAdapter.myMacAppID {
+                selectedAppID = nil
+            }
+        }
     }
 
     private var searchResults: [ShortcutCatalogEntry] {
-        store.results(text: query, appID: selectedAppID)
+        store.menuBarResults(text: query, appID: selectedAppID)
     }
 
     private var favourites: [ShortcutCatalogEntry] {
-        Array(store.results(text: "", sidebar: .favourites, appID: selectedAppID).prefix(6))
+        Array(store.menuBarResults(text: "", appID: selectedAppID, section: .favourites).prefix(6))
     }
 
     private var recents: [ShortcutCatalogEntry] {
-        Array(store.results(text: "", sidebar: .recentlyViewed, appID: selectedAppID).prefix(6))
+        Array(store.menuBarResults(text: "", appID: selectedAppID, section: .recentlyViewed).prefix(6))
     }
 
     @ViewBuilder
@@ -117,8 +143,6 @@ struct MenuBarSearchView: View {
     }
 
     private func showMainWindow() {
-        openWindow(id: "main")
-        NSApp.setActivationPolicy(.regular)
-        NSApp.activate(ignoringOtherApps: true)
+        MainWindowCoordinator.shared.show(store: store)
     }
 }

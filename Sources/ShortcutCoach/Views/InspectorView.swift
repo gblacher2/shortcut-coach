@@ -12,7 +12,11 @@ struct InspectorView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     header(shortcut)
-                    KeyCapRow(keys: shortcut.keys)
+                    if shortcut.owner == nil {
+                        KeyCapRow(keys: shortcut.keys)
+                    } else {
+                        localBindingSection(shortcut)
+                    }
                     savedControls(shortcut)
 
                     inspectorSection("When to use this") {
@@ -24,12 +28,6 @@ struct InspectorView: View {
                             Text(menuPath.joined(separator: "  ›  "))
                                 .foregroundStyle(.secondary)
                                 .textSelection(.enabled)
-                        }
-                    }
-
-                    if let output = shortcut.outputSummary {
-                        inspectorSection("Output") {
-                            Text(output)
                         }
                     }
 
@@ -68,13 +66,12 @@ struct InspectorView: View {
                     }
 
                     if let conflictIDs = shortcut.conflictIDs, !conflictIDs.isEmpty {
-                        ForEach(conflictIDs, id: \.self) { conflictSummary in
-                            Label("Conflict/Interception warning: \(conflictSummary)", systemImage: "exclamationmark.octagon.fill")
-                                .font(.callout)
-                                .foregroundStyle(.white)
-                                .padding(12)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(.red, in: RoundedRectangle(cornerRadius: 10))
+                        ForEach(conflictIDs, id: \.self) { conflictID in
+                            if let conflict = store.environmentConflict(withID: conflictID) {
+                                conflictWarning(conflict)
+                            } else {
+                                unresolvedConflictWarning(id: conflictID)
+                            }
                         }
                     }
 
@@ -135,6 +132,42 @@ struct InspectorView: View {
         }
     }
 
+    private func localBindingSection(_ shortcut: ShortcutCatalogEntry) -> some View {
+        inspectorSection("Local binding") {
+            Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 10) {
+                GridRow {
+                    Text("Input").foregroundStyle(.secondary)
+                    KeyCapRow(keys: shortcut.keys)
+                }
+
+                if let outputKeys = shortcut.outputKeys, !outputKeys.isEmpty {
+                    GridRow {
+                        Text("Output").foregroundStyle(.secondary)
+                        KeyCapRow(keys: outputKeys)
+                    }
+                }
+
+                if let outputSummary = shortcut.outputSummary {
+                    metadataRow("Result", outputSummary)
+                }
+                if let outputType = shortcut.outputType {
+                    metadataRow("Output type", humanized(outputType))
+                }
+                if let scope = shortcut.environmentScope {
+                    metadataRow("Scope", humanized(scope))
+                }
+                if let defaultStatus = shortcut.defaultStatus {
+                    metadataRow("Default status", humanized(defaultStatus))
+                }
+                if let classification = shortcut.environmentClassification {
+                    metadataRow("Library classification", classificationLabel(classification))
+                }
+            }
+            .font(.callout)
+            .accessibilityElement(children: .contain)
+        }
+    }
+
     private func notesSection(_ shortcut: ShortcutCatalogEntry) -> some View {
         inspectorSection("Personal note") {
             TextEditor(text: Binding(
@@ -175,11 +208,19 @@ struct InspectorView: View {
                 metadataRow("Verified", shortcut.validation.verifiedAt)
                 metadataRow("macOS", shortcut.validation.macOSVersion)
                 if let version = shortcut.validation.appVersion { metadataRow("App version", version) }
-                metadataRow("Method", shortcut.validation.method)
+                if let confidence = shortcut.environmentConfidence {
+                    metadataRow("Confidence", humanized(confidence))
+                } else {
+                    metadataRow("Method", shortcut.validation.method)
+                }
+                metadataRow("Source type", humanized(shortcut.sourceReference.kind.rawValue))
                 GridRow {
                     Text("Source").foregroundStyle(.secondary)
-                    if let rawURL = shortcut.sourceReference.url, let url = URL(string: rawURL) {
+                    if let rawURL = shortcut.sourceReference.url,
+                       let url = URL(string: rawURL),
+                       ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
                         Link(shortcut.sourceReference.title, destination: url)
+                            .accessibilityHint("Opens the verification source in your browser")
                     } else {
                         Text(shortcut.sourceReference.title)
                     }
@@ -188,6 +229,51 @@ struct InspectorView: View {
             .font(.callout)
             .textSelection(.enabled)
         }
+    }
+
+    private func conflictWarning(_ conflict: EnvironmentConflict) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Label("Interception warning", systemImage: "exclamationmark.octagon.fill")
+                .font(.callout.bold())
+                .foregroundStyle(.red)
+            Text(conflict.summary)
+                .font(.callout.weight(.medium))
+            Text("\(humanized(conflict.severity.rawValue)) severity · \(humanized(conflict.type.rawValue))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text("Evidence: \(conflict.evidence)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text("Safe check: \(conflict.recommendedNonDestructiveTest)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(.red.opacity(0.55), lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "Interception warning. \(conflict.summary). "
+            + "\(humanized(conflict.severity.rawValue)) severity. "
+            + "Safe check: \(conflict.recommendedNonDestructiveTest)"
+        )
+    }
+
+    private func unresolvedConflictWarning(id: String) -> some View {
+        Label(
+            "Interception warning details are unavailable (\(id)).",
+            systemImage: "exclamationmark.octagon.fill"
+        )
+        .font(.callout.bold())
+        .foregroundStyle(.red)
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
+        .accessibilityLabel("Interception warning details are unavailable. Reference \(id).")
     }
 
     @ToolbarContentBuilder
@@ -215,6 +301,22 @@ struct InspectorView: View {
         GridRow {
             Text(title).foregroundStyle(.secondary)
             Text(value)
+        }
+    }
+
+    private func humanized(_ value: String) -> String {
+        value
+            .replacingOccurrences(of: "-", with: " ")
+            .replacingOccurrences(of: "_", with: " ")
+            .capitalized
+    }
+
+    private func classificationLabel(_ value: EnvironmentClassification) -> String {
+        switch value {
+        case .add: "macOS System"
+        case .keepSeparateFromBuiltInCatalog: "Personal Setup"
+        case .update: "Catalog Update"
+        case .omit: "Omitted"
         }
     }
 }

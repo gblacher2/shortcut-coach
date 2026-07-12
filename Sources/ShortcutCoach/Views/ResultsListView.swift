@@ -31,6 +31,9 @@ struct ResultsListView: View {
             searchFocused = true
             return .handled
         }
+        .onChange(of: store.query) { _, _ in
+            store.reconcileSelectedShortcut()
+        }
         .accessibilityLabel("Shortcut results")
     }
 
@@ -44,7 +47,10 @@ struct ResultsListView: View {
         case .myMacPersonal: "Personal Setup"
         case let .app(id): store.apps.first(where: { $0.id == id })?.name ?? (id == "my-mac" ? "All My Mac Shortcuts" : "App")
         case let .tag(tag): tag
-        case let .category(cat): cat.replacingOccurrences(of: "-", with: " ").capitalized
+        case let .category(category):
+            category == "spaces-mission-control"
+                ? "Spaces & Mission Control"
+                : category.replacingOccurrences(of: "-", with: " ").capitalized
         case let .collection(id): store.userState.collections[id]?.name ?? "Collection"
         }
     }
@@ -82,7 +88,14 @@ private struct ResultRowView: View {
         .padding(.vertical, 3)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(shortcut.owner ?? shortcut.appName), \(shortcut.title), \(shortcut.displayText)")
+        .accessibilityLabel(accessibilitySummary)
+    }
+
+    private var accessibilitySummary: String {
+        var parts = [shortcut.owner ?? shortcut.appName, shortcut.title, shortcut.displayText]
+        if store.favourites.contains(shortcut.id) { parts.append("Favourite") }
+        if store.toLearn.contains(shortcut.id) { parts.append("To Learn") }
+        return parts.joined(separator: ", ")
     }
 }
 

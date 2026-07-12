@@ -7,10 +7,13 @@ import UniformTypeIdentifiers
 @Observable
 @MainActor
 final class ShortcutStore {
+    static let shared = ShortcutStore()
+
     private(set) var catalog: ShortcutCatalog?
     private(set) var shortcuts: [ShortcutCatalogEntry] = []
     private(set) var sourceDescription = "Loading…"
     private(set) var userState = UserLibraryState()
+    private(set) var environmentConflictsByID: [String: EnvironmentConflict] = [:]
 
     var selectedSidebarItem: SidebarSelection = .all
     var selectedShortcutID: String?
@@ -31,8 +34,11 @@ final class ShortcutStore {
         self.loader = loader
         self.libraryManager = libraryManager
         self.searchService = searchService
-        loadPersonalState()
+        let personalStateError = loadPersonalState()
         refreshCatalog()
+        if let personalStateError {
+            errorMessage = personalStateError
+        }
     }
 
     var apps: [SupportedApp] { catalog?.apps ?? SupportedApp.launchApps }
@@ -45,20 +51,49 @@ final class ShortcutStore {
     var toLearn: Set<String> { userState.toLearn }
     var recents: [String] { userState.recents }
 
-    var filteredShortcuts: [ShortcutCatalogEntry] {
-        results(text: query, sidebar: selectedSidebarItem)
+    var environmentNotice: EnvironmentAvailabilityNotice? {
+        switch environmentState {
+        case .loaded:
+            nil
+        case .missing:
+            EnvironmentAvailabilityNotice(
+                title: "My Mac setup not found",
+                detail: "The nine-app library remains available. Add a valid local environment file to restore My Mac shortcuts."
+            )
+        case let .rejected(reason):
+            EnvironmentAvailabilityNotice(
+                title: "My Mac setup could not be loaded",
+                detail: "The nine-app library remains available. Reason: \(Self.safeEnvironmentReason(reason))."
+            )
+        }
     }
 
-    func results(text: String, sidebar: SidebarSelection = .all, appID: String? = nil) -> [ShortcutCatalogEntry] {
+    var filteredShortcuts: [ShortcutCatalogEntry] {
+        results(matching: ShortcutQueryScopeAdapter.fullWindow(text: query, sidebar: selectedSidebarItem))
+    }
+
+    func results(matching query: ShortcutSearchQuery) -> [ShortcutCatalogEntry] {
         searchService.results(
             in: shortcuts,
-            query: ShortcutSearchQuery(text: text, sidebar: sidebar, appID: appID),
+            query: query,
             userState: userState
         )
     }
 
+    func menuBarResults(
+        text: String,
+        appID: String?,
+        section: SidebarSelection = .all
+    ) -> [ShortcutCatalogEntry] {
+        results(matching: ShortcutQueryScopeAdapter.menuBar(text: text, appID: appID, section: section))
+    }
+
     func shortcut(withID id: String) -> ShortcutCatalogEntry? {
         shortcuts.first { $0.id == id }
+    }
+
+    func environmentConflict(withID id: String) -> EnvironmentConflict? {
+        environmentConflictsByID[id]
     }
 
     func refreshCatalog() {
@@ -68,7 +103,14 @@ final class ShortcutStore {
             shortcuts = loaded.catalog.shortcuts
             sourceDescription = loaded.sourceDescription
             environmentState = loaded.environmentState
+            environmentConflictsByID = loaded.environmentConflictsByID
             errorMessage = nil
+
+            if environmentState != .loaded,
+               ShortcutQueryScopeAdapter.isMyMacSelection(selectedSidebarItem) {
+                selectedSidebarItem = .all
+            }
+
             if selectedShortcutID == nil || shortcut(withID: selectedShortcutID!) == nil {
                 selectedShortcutID = filteredShortcuts.first?.id
             }
@@ -86,6 +128,15 @@ final class ShortcutStore {
         selectedSidebarItem = .all
         selectedShortcutID = shortcut.id
         recordRecent(shortcut.id)
+    }
+
+    func reconcileSelectedShortcut() {
+        let visibleShortcuts = filteredShortcuts
+        let visibleIDs = Set(visibleShortcuts.map(\.id))
+        if let selectedShortcutID, visibleIDs.contains(selectedShortcutID) {
+            return
+        }
+        selectedShortcutID = visibleShortcuts.first?.id
     }
 
     func toggleFavourite(_ shortcut: ShortcutCatalogEntry) {
@@ -144,8 +195,12 @@ final class ShortcutStore {
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do {
             try libraryManager.export(to: url, state: userState)
+            errorMessage = nil
             statusMessage = "Personal state exported."
-        } catch { errorMessage = error.localizedDescription }
+        } catch {
+            statusMessage = nil
+            errorMessage = error.localizedDescription
+        }
     }
 
     func importBackup() {
@@ -158,13 +213,21 @@ final class ShortcutStore {
             userState = try libraryManager.import(from: url)
             selectedSidebarItem = .all
             selectedShortcutID = filteredShortcuts.first?.id
+            errorMessage = nil
             statusMessage = "Personal state imported."
-        } catch { errorMessage = error.localizedDescription }
+        } catch {
+            statusMessage = nil
+            errorMessage = error.localizedDescription
+        }
     }
 
-    private func loadPersonalState() {
-        do { userState = try libraryManager.load() }
-        catch { errorMessage = error.localizedDescription }
+    private func loadPersonalState() -> String? {
+        do {
+            userState = try libraryManager.load()
+            return nil
+        } catch {
+            return error.localizedDescription
+        }
     }
 
     private func recordRecent(_ id: String) {
@@ -178,4 +241,44 @@ final class ShortcutStore {
         do { try libraryManager.save(userState) }
         catch { errorMessage = error.localizedDescription }
     }
+
+    private static func safeEnvironmentReason(_ rawReason: String) -> String {
+        let reason = rawReason.lowercased()
+
+        if reason.contains("unsupported") && reason.contains("format") {
+            return "the environment format is unsupported"
+        }
+        if reason.contains("unsupported") && reason.contains("schema") {
+            return "the environment schema version is unsupported"
+        }
+        if reason.contains("duplicate") {
+            return "the environment contains duplicate identifiers"
+        }
+        if reason.contains("collid") {
+            return "an environment identifier conflicts with the built-in library"
+        }
+        if reason.contains("dangling") || reason.contains("references") {
+            return "the environment contains an invalid reference"
+        }
+        if reason.contains("overlap") || reason.contains("classification") || reason.contains("coverage") {
+            return "the environment classifications are inconsistent"
+        }
+        if reason.contains("display text") || reason.contains("displaytext") || reason.contains("ordered keys") {
+            return "a shortcut chord does not match its ordered keys"
+        }
+        if reason.contains("missing required") || reason.contains("blank") || reason.contains("nonblank") {
+            return "required shortcut metadata is incomplete"
+        }
+        if reason.contains("decode") || reason.contains("data corrupted") || reason.contains("not valid")
+            || reason.contains("malformed") || reason.contains("could not be read") {
+            return "the environment file is malformed"
+        }
+
+        return "the local environment did not pass validation"
+    }
+}
+
+struct EnvironmentAvailabilityNotice: Equatable {
+    let title: String
+    let detail: String
 }
