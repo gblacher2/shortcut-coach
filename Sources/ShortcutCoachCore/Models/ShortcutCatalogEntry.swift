@@ -10,6 +10,7 @@ public enum EntryStability: String, Codable, CaseIterable, Sendable {
 public enum SourceKind: String, Codable, Sendable {
     case officialDocumentation = "official-documentation"
     case installedAppMenu = "installed-app-menu"
+    case localConfiguration = "local-configuration"
 }
 
 public struct SourceReference: Codable, Equatable, Hashable, Sendable {

@@ -12,52 +12,56 @@ public struct CatalogLoader: Sendable {
             let baseCatalog = try JSONDecoder().decode(ShortcutCatalog.self, from: Data(contentsOf: url))
             var allShortcuts = baseCatalog.shortcuts
 
+            var environmentWarning: String? = nil
             if let envUrl = Bundle.module.url(forResource: "my-mac-environment", withExtension: "json") {
-                let envCatalog = try JSONDecoder().decode(EnvironmentCatalog.self, from: Data(contentsOf: envUrl))
-                
-                let adds = Set(envCatalog.recommendedShortcutCoachChanges.add.map(\.bindingID))
-                let separates = Set(envCatalog.recommendedShortcutCoachChanges.keepSeparateFromBuiltInCatalog.map(\.bindingID))
-                let validConflictIDs = Set(envCatalog.conflicts.map(\.id))
-                
-                let envEntries = try envCatalog.bindings.map { binding -> ShortcutCatalogEntry in
-                    let status: String
-                    if adds.contains(binding.id) { status = "add" }
-                    else if separates.contains(binding.id) { status = "keepSeparateFromBuiltInCatalog" }
-                    else { status = "custom" }
+                do {
+                    let envCatalog = try JSONDecoder().decode(EnvironmentCatalog.self, from: Data(contentsOf: envUrl))
+                    try envCatalog.validate()
                     
-                    for conflictID in binding.conflictIDs {
-                        if !validConflictIDs.contains(conflictID) {
-                            throw CatalogError.invalidCatalog(reason: "Dangling conflict reference: \(conflictID)")
+                    let adds = Set(envCatalog.recommendedShortcutCoachChanges.add.map(\.bindingID))
+                    let separates = Set(envCatalog.recommendedShortcutCoachChanges.keepSeparateFromBuiltInCatalog.map(\.bindingID))
+                    
+                    let envEntries = envCatalog.bindings.map { binding -> ShortcutCatalogEntry in
+                        let status: String
+                        if adds.contains(binding.id) { status = "add" }
+                        else if separates.contains(binding.id) { status = "keepSeparateFromBuiltInCatalog" }
+                        else { status = "custom" }
+                        
+                        let resolvedConflicts = binding.conflictIDs.compactMap { cid in 
+                            envCatalog.conflicts.first(where: { $0.id == cid })?.summary 
                         }
+                        
+                        let sourceKind: SourceKind
+                        if let stype = binding.source, stype.starts(with: "http") {
+                            sourceKind = .officialDocumentation
+                        } else {
+                            sourceKind = .localConfiguration
+                        }
+                        
+                        let guidance = binding.output?.summary ?? binding.caveat ?? "Local configuration"
+                        
+                        return ShortcutCatalogEntry(
+                            id: binding.id,
+                            appID: "my-mac",
+                            title: binding.action,
+                            keys: binding.keys,
+                            displayText: binding.displayText,
+                            taskTags: [],
+                            category: binding.category,
+                            guidance: guidance,
+                            sourceReference: SourceReference(title: binding.source ?? "Local Configuration", kind: sourceKind),
+                            validation: ValidationMetadata(macOSVersion: envCatalog.macOSVersion, verifiedAt: envCatalog.generatedAt, method: binding.confidence),
+                            caveat: binding.caveat,
+                            owner: binding.owner,
+                            conflictIDs: resolvedConflicts,
+                            defaultStatus: status,
+                            outputSummary: binding.output?.summary
+                        )
                     }
-                    
-                    // Actually, let's map conflictIDs to actual conflict summaries for the UI to display directly? 
-                    // No, the UI can just show the conflict ID or we can map it to caveat! Wait, the brief says:
-                    // "The inspector explains inputs and outputs and displays the three conflict/interception warnings on the correct records."
-                    // Since we have the summary in EnvironmentConflict, let's pass the summary instead of ID!
-                    let resolvedConflicts = binding.conflictIDs.compactMap { cid in 
-                        envCatalog.conflicts.first(where: { $0.id == cid })?.summary 
-                    }
-                    
-                    return ShortcutCatalogEntry(
-                        id: binding.id,
-                        appID: "my-mac",
-                        title: binding.action,
-                        keys: binding.keys,
-                        displayText: binding.displayText,
-                        taskTags: [],
-                        category: binding.category,
-                        guidance: "Local environment mapping.",
-                        sourceReference: SourceReference(title: binding.source ?? "Local Configuration", kind: .installedAppMenu),
-                        validation: ValidationMetadata(macOSVersion: "local", verifiedAt: "now", method: "local"),
-                        caveat: binding.caveat,
-                        owner: binding.owner,
-                        conflictIDs: resolvedConflicts,
-                        defaultStatus: status,
-                        outputSummary: binding.output?.summary
-                    )
+                    allShortcuts.append(contentsOf: envEntries)
+                } catch {
+                    environmentWarning = "Failed to load My Mac environment: \(error.localizedDescription)"
                 }
-                allShortcuts.append(contentsOf: envEntries)
             }
 
             let finalCatalog = ShortcutCatalog(
@@ -69,7 +73,7 @@ public struct CatalogLoader: Sendable {
                 shortcuts: allShortcuts
             )
 
-            return LoadedCatalog(catalog: finalCatalog, sourceDescription: "Built-in catalog v\(finalCatalog.catalogVersion)")
+            return LoadedCatalog(catalog: finalCatalog, sourceDescription: "Built-in catalog v\(finalCatalog.catalogVersion)", environmentWarning: environmentWarning)
         } catch let DecodingError.dataCorrupted(context) {
             throw CatalogError.invalidCatalog(reason: "Data corrupted: \(context)")
         } catch let DecodingError.keyNotFound(key, context) {
@@ -87,6 +91,7 @@ public struct CatalogLoader: Sendable {
 public struct LoadedCatalog: Sendable {
     public let catalog: ShortcutCatalog
     public let sourceDescription: String
+    public let environmentWarning: String?
 }
 
 public enum CatalogError: LocalizedError {
