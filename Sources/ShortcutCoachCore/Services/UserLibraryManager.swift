@@ -122,9 +122,8 @@ public final class UserLibraryManager: @unchecked Sendable {
             try encoder.encode(legacyBackup).write(to: migrationBackupURL, options: .atomic)
 
             var state = UserLibraryState()
-            if let practiceData,
-               let snapshot = try? JSONDecoder().decode(DailyPracticeSnapshot.self, from: practiceData) {
-                state.practiceSnapshot = snapshot
+            if let practiceData {
+                state.practiceSnapshot = try JSONDecoder().decode(DailyPracticeSnapshot.self, from: practiceData)
             }
             if let metadataData {
                 let metadata = try JSONDecoder().decode(LegacyUserMetadata.self, from: metadataData)
@@ -137,8 +136,10 @@ public final class UserLibraryManager: @unchecked Sendable {
                 })
             }
             try validate(state)
-            try writeState(state, to: stateURL, updateRecovery: true)
-            return state
+            let migratedState = LegacyShortcutIDMigrator.migrate(state)
+            try validate(migratedState)
+            try writeState(migratedState, to: stateURL, updateRecovery: true)
+            return migratedState
         } catch {
             // UserDefaults remains untouched, so the pre-migration state stays usable.
             throw UserLibraryManagerError.ioError(error.localizedDescription)
@@ -151,6 +152,9 @@ public final class UserLibraryManager: @unchecked Sendable {
         }
         guard state.recents.count <= 50 else {
             throw UserLibraryManagerError.invalidState("more than 50 recent items")
+        }
+        guard Set(state.recents).count == state.recents.count else {
+            throw UserLibraryManagerError.invalidState("duplicate recent items")
         }
         guard state.collections.values.allSatisfy({ !$0.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) else {
             throw UserLibraryManagerError.invalidState("empty collection name")
