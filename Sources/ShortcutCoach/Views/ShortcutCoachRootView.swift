@@ -50,6 +50,7 @@ private struct HeaderView: View {
             }
             .buttonStyle(.borderless)
             .help("Refresh shortcuts")
+            .accessibilityLabel("Refresh shortcuts")
         }
         .padding(14)
     }
@@ -71,6 +72,7 @@ private struct FooterView: View {
             }
             .controlSize(.small)
             .help("Open the interactive HTML guide")
+            .accessibilityLabel("Open the interactive HTML guide")
             Button("Quit") {
                 store.quit()
             }
