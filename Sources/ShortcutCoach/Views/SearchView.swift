@@ -83,16 +83,21 @@ struct SearchView: View {
 
             Divider()
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 8) {
-                    ForEach(store.filteredShortcuts) { shortcut in
-                        ShortcutRow(shortcut: shortcut, showNotes: true)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 4)
+            if store.filteredShortcuts.isEmpty {
+                ContentUnavailableView("No results found", systemImage: "magnifyingglass", description: Text("Try adjusting your search or filters."))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 8) {
+                        ForEach(store.filteredShortcuts) { shortcut in
+                            ShortcutRow(shortcut: shortcut, showNotes: true)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 4)
+                        }
                     }
+                    .padding(.top, 10)
+                    .padding(.bottom, 20)
                 }
-                .padding(.top, 10)
-                .padding(.bottom, 20)
             }
         }
     }
