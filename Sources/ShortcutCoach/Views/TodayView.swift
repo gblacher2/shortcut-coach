@@ -84,6 +84,7 @@ struct TodayView: View {
                         }
                         .buttonStyle(.plain)
                         .help(store.isPracticed(shortcut) ? "Mark as not practiced" : "Mark as practiced")
+                        .accessibilityLabel(store.isPracticed(shortcut) ? "Mark as not practiced" : "Mark as practiced")
                         ShortcutRow(shortcut: shortcut, showNotes: false)
                             .opacity(store.isPracticed(shortcut) ? 0.68 : 1)
                     }
