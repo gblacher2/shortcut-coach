@@ -50,6 +50,7 @@ private struct HeaderView: View {
             }
             .buttonStyle(.borderless)
             .help("Refresh shortcuts")
+            .accessibilityLabel("Refresh shortcuts")
         }
         .padding(14)
     }
