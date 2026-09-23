@@ -52,7 +52,7 @@ public enum DailyPracticeProgress {
         return updated
     }
 
-    public static func completedCount(todayShortcuts: [ShortcutItem], snapshot: DailyPracticeSnapshot) -> Int {
+    public static func completedCount(todayShortcuts: [ShortcutCatalogEntry], snapshot: DailyPracticeSnapshot) -> Int {
         todayShortcuts.filter { snapshot.practicedIDs.contains($0.id) }.count
     }
 }

@@ -1,0 +1,1998 @@
+{
+  "format": "shortcut-coach-environment/v1",
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-12T11:00:41-03:00",
+  "macOSVersion": "26.5.1",
+  "macOSBuild": "25F80",
+  "architecture": "arm64",
+  "currentKeyboardLayout": "Brazilian - Pro",
+  "inputSources": [
+    "PressAndHold",
+    "Brazilian - Pro"
+  ],
+  "privacyNote": "Local-only inventory. Secrets, API keys, account identifiers, document contents, clipboard data, and unrelated application preferences were excluded.",
+  "sources": [
+    {
+      "path": "~/.config/karabiner/karabiner.json",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "direct JSON inspection",
+      "summary": "Selected profile, complex rules, modifiers, outputs, repeat behavior, and device conditions."
+    },
+    {
+      "path": "~/.hammerspoon/init.lua",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "direct Lua inspection",
+      "summary": "Command-scroll handlers and non-keyboard Night Shift automation."
+    },
+    {
+      "path": "~/Library/Preferences/app.betterstage.macos.plist",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "plutil plus decoded embedded JSON",
+      "summary": "Preset, unassigned custom shortcut table, Snap Wheel triggers and slot actions; sensitive values excluded."
+    },
+    {
+      "path": "~/Library/Preferences/.GlobalPreferences.plist",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "defaults/plutil inspection",
+      "summary": "AppleSymbolicHotKeys, keyboard repeat, press-and-hold, and input source shortcut state."
+    },
+    {
+      "path": "~/Library/Preferences/com.apple.HIToolbox.plist",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "defaults inspection",
+      "summary": "Current keyboard layout and enabled input sources."
+    },
+    {
+      "path": "~/Library/KeyBindings/DefaultKeyBinding.dict",
+      "exists": false,
+      "status": "absent",
+      "evidenceMethod": "filesystem inspection",
+      "summary": "No custom Cocoa key-binding dictionary."
+    },
+    {
+      "path": "hidutil property --get UserKeyMapping",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "read-only system query",
+      "summary": "No HID user key mappings."
+    },
+    {
+      "path": "application NSUserKeyEquivalents",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "preference-domain scan",
+      "summary": "No custom per-app menu keyboard equivalents found."
+    },
+    {
+      "path": "https://support.apple.com/en-au/guide/mac-help/mh35798/mac",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "official documentation",
+      "summary": "Mission Control and app-window shortcuts."
+    },
+    {
+      "path": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "official documentation",
+      "summary": "macOS window tiling and arrangement shortcuts."
+    },
+    {
+      "path": "https://support.apple.com/en-us/102650",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "official documentation",
+      "summary": "General macOS keyboard shortcut cross-check."
+    },
+    {
+      "path": "running processes",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "read-only process listing",
+      "summary": "Karabiner services, Hammerspoon, and BetterStage are running."
+    },
+    {
+      "path": "/Applications and command-line PATH",
+      "exists": true,
+      "status": "read",
+      "evidenceMethod": "filesystem and executable lookup",
+      "summary": "Installed versions and absence of the other named shortcut/window tools."
+    }
+  ],
+  "tools": [
+    {
+      "name": "Karabiner-Elements",
+      "installed": true,
+      "version": "16.0.0",
+      "running": true,
+      "installedPath": "/Applications/Karabiner-Elements.app",
+      "configSources": [
+        "~/.config/karabiner/karabiner.json"
+      ],
+      "capabilityCategories": [
+        "key-remapping",
+        "text-editing"
+      ],
+      "notes": "Selected profile has 10 enabled complex-rule manipulators; no simple modifications, Fn modifications, or device-specific rules."
+    },
+    {
+      "name": "Hammerspoon",
+      "installed": true,
+      "version": "1.1.1",
+      "running": true,
+      "installedPath": "/Applications/Hammerspoon.app",
+      "configSources": [
+        "~/.hammerspoon/init.lua"
+      ],
+      "capabilityCategories": [
+        "mouse-remapping",
+        "text-editing",
+        "display-automation"
+      ],
+      "notes": "Two Command-scroll bindings. Also runs a Night Shift watcher/timer via /opt/homebrew/bin/nightlight; that automation is not a keyboard binding."
+    },
+    {
+      "name": "BetterStage",
+      "installed": true,
+      "version": "1.2.5",
+      "running": true,
+      "installedPath": "/Applications/BetterStage.app",
+      "configSources": [
+        "~/Library/Preferences/app.betterstage.macos.plist"
+      ],
+      "capabilityCategories": [
+        "window-management",
+        "mouse-gesture",
+        "trackpad-gesture"
+      ],
+      "notes": "European preset; all 41 custom shortcut slots are unassigned (keyCode -1). Snap Wheel is assigned to middle click and four-finger tap. Stage Manager integration is configured for native mode."
+    },
+    {
+      "name": "Rectangle",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Magnet",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Raycast",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Alfred",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Keyboard Maestro",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "BetterTouchTool",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Loop",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "Moom",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "AeroSpace",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "yabai",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    },
+    {
+      "name": "skhd",
+      "installed": false,
+      "version": null,
+      "running": false,
+      "installedPath": null,
+      "configSources": [],
+      "capabilityCategories": [],
+      "notes": "Not found in /Applications, user Applications, common support locations, or command-line PATH during this audit."
+    }
+  ],
+  "bindings": [
+    {
+      "id": "karabiner.fn-left",
+      "category": "text-editing",
+      "action": "Move to beginning of line",
+      "keys": [
+        "Fn",
+        "Left Arrow"
+      ],
+      "displayText": "Fn + Left Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Left Arrow",
+        "keys": [
+          "Command",
+          "Left Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-right",
+      "category": "text-editing",
+      "action": "Move to end of line",
+      "keys": [
+        "Fn",
+        "Right Arrow"
+      ],
+      "displayText": "Fn + Right Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Right Arrow",
+        "keys": [
+          "Command",
+          "Right Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-up",
+      "category": "text-editing",
+      "action": "Move to beginning of document or text area",
+      "keys": [
+        "Fn",
+        "Up Arrow"
+      ],
+      "displayText": "Fn + Up Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Up Arrow",
+        "keys": [
+          "Command",
+          "Up Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-down",
+      "category": "text-editing",
+      "action": "Move to end of document or text area",
+      "keys": [
+        "Fn",
+        "Down Arrow"
+      ],
+      "displayText": "Fn + Down Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Down Arrow",
+        "keys": [
+          "Command",
+          "Down Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-shift-left",
+      "category": "text-editing",
+      "action": "Select to beginning of line",
+      "keys": [
+        "Fn",
+        "Shift",
+        "Left Arrow"
+      ],
+      "displayText": "Fn + Shift + Left Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Shift"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Shift + Left Arrow",
+        "keys": [
+          "Command",
+          "Shift",
+          "Left Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-shift-right",
+      "category": "text-editing",
+      "action": "Select to end of line",
+      "keys": [
+        "Fn",
+        "Shift",
+        "Right Arrow"
+      ],
+      "displayText": "Fn + Shift + Right Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Shift"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Shift + Right Arrow",
+        "keys": [
+          "Command",
+          "Shift",
+          "Right Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-shift-up",
+      "category": "text-editing",
+      "action": "Select to beginning of document or text area",
+      "keys": [
+        "Fn",
+        "Shift",
+        "Up Arrow"
+      ],
+      "displayText": "Fn + Shift + Up Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Shift"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Shift + Up Arrow",
+        "keys": [
+          "Command",
+          "Shift",
+          "Up Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.fn-shift-down",
+      "category": "text-editing",
+      "action": "Select to end of document or text area",
+      "keys": [
+        "Fn",
+        "Shift",
+        "Down Arrow"
+      ],
+      "displayText": "Fn + Shift + Down Arrow",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Shift"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Shift + Down Arrow",
+        "keys": [
+          "Command",
+          "Shift",
+          "Down Arrow"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "karabiner.command-y-redo",
+      "category": "text-editing",
+      "action": "Redo",
+      "keys": [
+        "Command",
+        "Y"
+      ],
+      "displayText": "Command + Y",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Y",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Command"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + Shift + Z",
+        "keys": [
+          "Command",
+          "Shift",
+          "Z"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": [
+        "conflict.karabiner-command-y-global-shadow"
+      ]
+    },
+    {
+      "id": "karabiner.control-delete-word",
+      "category": "text-editing",
+      "action": "Delete previous word",
+      "keys": [
+        "Control",
+        "Delete"
+      ],
+      "displayText": "Control + Delete",
+      "owner": "Karabiner-Elements",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.config/karabiner/karabiner.json — selected profile “Default profile”, rule “Mac-native Windows transition helpers”",
+      "input": {
+        "keyCode": "Delete",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [
+          "Caps Lock"
+        ],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Option + Delete",
+        "keys": [
+          "Option",
+          "Delete"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": true,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "The receiving app controls the exact text-navigation behavior.",
+      "conflictIDs": []
+    },
+    {
+      "id": "hammerspoon.command-scroll-up",
+      "category": "text-editing",
+      "action": "Zoom In",
+      "keys": [
+        "Command",
+        "Scroll Up"
+      ],
+      "displayText": "Command + Scroll Up",
+      "owner": "Hammerspoon",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.hammerspoon/init.lua — hs.eventtap scrollWheel handler",
+      "input": {
+        "keyCode": "scroll_up",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Command"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + =",
+        "keys": [
+          "Command",
+          "="
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Swallows the original Command-scroll event and substitutes a keyboard zoom command.",
+      "conflictIDs": [
+        "conflict.hammerspoon-command-scroll-intercept"
+      ]
+    },
+    {
+      "id": "hammerspoon.command-scroll-down",
+      "category": "text-editing",
+      "action": "Zoom Out",
+      "keys": [
+        "Command",
+        "Scroll Down"
+      ],
+      "displayText": "Command + Scroll Down",
+      "owner": "Hammerspoon",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/.hammerspoon/init.lua — hs.eventtap scrollWheel handler",
+      "input": {
+        "keyCode": "scroll_down",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Command"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "key-chord",
+        "summary": "Emit Command + -",
+        "keys": [
+          "Command",
+          "-"
+        ]
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Swallows the original Command-scroll event and substitutes a keyboard zoom command.",
+      "conflictIDs": [
+        "conflict.hammerspoon-command-scroll-intercept"
+      ]
+    },
+    {
+      "id": "betterstage.middle-click-snap-wheel",
+      "category": "window-management",
+      "action": "Open or toggle Snap Wheel",
+      "keys": [
+        "Middle Mouse Button"
+      ],
+      "displayText": "Middle Mouse Button",
+      "owner": "BetterStage",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/Library/Preferences/app.betterstage.macos.plist — snapWheelTriggers",
+      "input": {
+        "keyCode": null,
+        "consumerKeyCode": null,
+        "pointingButton": "middle",
+        "mandatoryModifiers": [],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "app-action",
+        "summary": "Toggle BetterStage Snap Wheel",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "BetterStage is configured to block the default middle click.",
+      "conflictIDs": [
+        "conflict.betterstage-middle-click-block"
+      ]
+    },
+    {
+      "id": "betterstage.four-finger-tap-snap-wheel",
+      "category": "window-management",
+      "action": "Open or toggle Snap Wheel",
+      "keys": [
+        "Four-Finger Tap"
+      ],
+      "displayText": "Four-Finger Tap",
+      "owner": "BetterStage",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "custom",
+      "sourceType": "tool-config",
+      "source": "~/Library/Preferences/app.betterstage.macos.plist — snapWheelTriggers",
+      "input": {
+        "keyCode": "four_finger_tap",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "app-action",
+        "summary": "Toggle BetterStage Snap Wheel",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Trackpad gesture behavior depends on BetterStage and macOS gesture recognition.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-60",
+      "category": "input-sources",
+      "action": "Select previous input source",
+      "keys": [
+        "Control",
+        "Space"
+      ],
+      "displayText": "Control + Space",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 60, enabled=true, parameter mask 262144",
+      "input": {
+        "keyCode": "Space",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Select previous input source",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": true,
+      "confidence": "verified",
+      "caveat": "Availability depends on configured input sources.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-61",
+      "category": "input-sources",
+      "action": "Select next input source",
+      "keys": [
+        "Control",
+        "Option",
+        "Space"
+      ],
+      "displayText": "Control + Option + Space",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 61, enabled=true, parameter mask 786432",
+      "input": {
+        "keyCode": "Space",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control",
+          "Option"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Select next input source",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": true,
+      "confidence": "verified",
+      "caveat": "Availability depends on configured input sources.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-79",
+      "category": "spaces",
+      "action": "Move left a Space",
+      "keys": [
+        "Control",
+        "Left Arrow"
+      ],
+      "displayText": "Control + Left Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 79, enabled=true",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Move left a Space",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Requires more than one Space to be useful.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-80",
+      "category": "spaces",
+      "action": "Move left a Space (alternate)",
+      "keys": [
+        "Control",
+        "Option",
+        "Left Arrow"
+      ],
+      "displayText": "Control + Option + Left Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 80, enabled=true",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control",
+          "Option"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Move left a Space (alternate)",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Requires more than one Space to be useful.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-81",
+      "category": "spaces",
+      "action": "Move right a Space",
+      "keys": [
+        "Control",
+        "Right Arrow"
+      ],
+      "displayText": "Control + Right Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 81, enabled=true",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Move right a Space",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Requires more than one Space to be useful.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.symbolic-hotkey-82",
+      "category": "spaces",
+      "action": "Move right a Space (alternate)",
+      "keys": [
+        "Control",
+        "Option",
+        "Right Arrow"
+      ],
+      "displayText": "Control + Option + Right Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-configured",
+      "sourceType": "system-preference",
+      "source": "~/Library/Preferences/.GlobalPreferences.plist — AppleSymbolicHotKeys ID 82, enabled=true",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control",
+          "Option"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Move right a Space (alternate)",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "verified",
+      "caveat": "Requires more than one Space to be useful.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.mission-control",
+      "category": "mission-control",
+      "action": "Open Mission Control",
+      "keys": [
+        "Control",
+        "Up Arrow"
+      ],
+      "displayText": "Control + Up Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-au/guide/mac-help/mh35798/mac",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Open Mission Control",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": null,
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.app-expose",
+      "category": "mission-control",
+      "action": "Show windows of the current app",
+      "keys": [
+        "Control",
+        "Down Arrow"
+      ],
+      "displayText": "Control + Down Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-au/guide/mac-help/mh35798/mac",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Show windows of the current app",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": null,
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-fill",
+      "category": "window-management",
+      "action": "Fill the screen",
+      "keys": [
+        "Fn",
+        "Control",
+        "F"
+      ],
+      "displayText": "Fn + Control + F",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "F",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Fill the screen",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-center",
+      "category": "window-management",
+      "action": "Center the window",
+      "keys": [
+        "Fn",
+        "Control",
+        "C"
+      ],
+      "displayText": "Fn + Control + C",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "C",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Center the window",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-left",
+      "category": "window-management",
+      "action": "Tile window to left half",
+      "keys": [
+        "Fn",
+        "Control",
+        "Left Arrow"
+      ],
+      "displayText": "Fn + Control + Left Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Tile window to left half",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-right",
+      "category": "window-management",
+      "action": "Tile window to right half",
+      "keys": [
+        "Fn",
+        "Control",
+        "Right Arrow"
+      ],
+      "displayText": "Fn + Control + Right Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Tile window to right half",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-top",
+      "category": "window-management",
+      "action": "Tile window to top half",
+      "keys": [
+        "Fn",
+        "Control",
+        "Up Arrow"
+      ],
+      "displayText": "Fn + Control + Up Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Tile window to top half",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-bottom",
+      "category": "window-management",
+      "action": "Tile window to bottom half",
+      "keys": [
+        "Fn",
+        "Control",
+        "Down Arrow"
+      ],
+      "displayText": "Fn + Control + Down Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Tile window to bottom half",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.tile-restore",
+      "category": "window-management",
+      "action": "Return to previous size",
+      "keys": [
+        "Fn",
+        "Control",
+        "R"
+      ],
+      "displayText": "Fn + Control + R",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "R",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Return to previous size",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-left-right",
+      "category": "window-management",
+      "action": "Arrange windows left and right",
+      "keys": [
+        "Fn",
+        "Control",
+        "Shift",
+        "Left Arrow"
+      ],
+      "displayText": "Fn + Control + Shift + Left Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange windows left and right",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-right-left",
+      "category": "window-management",
+      "action": "Arrange windows right and left",
+      "keys": [
+        "Fn",
+        "Control",
+        "Shift",
+        "Right Arrow"
+      ],
+      "displayText": "Fn + Control + Shift + Right Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange windows right and left",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-top-bottom",
+      "category": "window-management",
+      "action": "Arrange windows top and bottom",
+      "keys": [
+        "Fn",
+        "Control",
+        "Shift",
+        "Up Arrow"
+      ],
+      "displayText": "Fn + Control + Shift + Up Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange windows top and bottom",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-bottom-top",
+      "category": "window-management",
+      "action": "Arrange windows bottom and top",
+      "keys": [
+        "Fn",
+        "Control",
+        "Shift",
+        "Down Arrow"
+      ],
+      "displayText": "Fn + Control + Shift + Down Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange windows bottom and top",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-left-quarters",
+      "category": "window-management",
+      "action": "Arrange left half and right quarters",
+      "keys": [
+        "Fn",
+        "Control",
+        "Option",
+        "Shift",
+        "Left Arrow"
+      ],
+      "displayText": "Fn + Control + Option + Shift + Left Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Left Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Option",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange left half and right quarters",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-right-quarters",
+      "category": "window-management",
+      "action": "Arrange right half and left quarters",
+      "keys": [
+        "Fn",
+        "Control",
+        "Option",
+        "Shift",
+        "Right Arrow"
+      ],
+      "displayText": "Fn + Control + Option + Shift + Right Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Right Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Option",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange right half and left quarters",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-top-quarters",
+      "category": "window-management",
+      "action": "Arrange top half and bottom quarters",
+      "keys": [
+        "Fn",
+        "Control",
+        "Option",
+        "Shift",
+        "Up Arrow"
+      ],
+      "displayText": "Fn + Control + Option + Shift + Up Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Up Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Option",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange top half and bottom quarters",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    },
+    {
+      "id": "macos.arrange-bottom-quarters",
+      "category": "window-management",
+      "action": "Arrange bottom half and top quarters",
+      "keys": [
+        "Fn",
+        "Control",
+        "Option",
+        "Shift",
+        "Down Arrow"
+      ],
+      "displayText": "Fn + Control + Option + Shift + Down Arrow",
+      "owner": "macOS",
+      "scope": "global",
+      "enabled": true,
+      "defaultStatus": "system-default",
+      "sourceType": "official-documentation",
+      "source": "https://support.apple.com/en-euro/guide/mac-help/mchl9674d0b0/mac",
+      "input": {
+        "keyCode": "Down Arrow",
+        "consumerKeyCode": null,
+        "pointingButton": null,
+        "mandatoryModifiers": [
+          "Fn",
+          "Control",
+          "Option",
+          "Shift"
+        ],
+        "optionalModifiers": [],
+        "simultaneousKeys": []
+      },
+      "output": {
+        "type": "system-action",
+        "summary": "Arrange bottom half and top quarters",
+        "keys": []
+      },
+      "conditions": [],
+      "deviceFilters": [],
+      "repeat": false,
+      "layoutSensitive": false,
+      "confidence": "official",
+      "caveat": "Availability can vary by window and app; BetterStage may provide an overlapping manual workflow.",
+      "conflictIDs": []
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "conflict.karabiner-command-y-global-shadow",
+      "bindingIDs": [
+        "karabiner.command-y-redo"
+      ],
+      "severity": "medium",
+      "type": "global-shadow",
+      "summary": "Global Command + Y remap replaces app-specific Command + Y behavior, including Chrome History.",
+      "evidence": "Karabiner rule has no app conditions; Chrome documents Command + Y for History.",
+      "recommendedNonDestructiveTest": "Open Karabiner-EventViewer, press Command + Y in Chrome, and confirm the emitted Command + Shift + Z without changing settings."
+    },
+    {
+      "id": "conflict.hammerspoon-command-scroll-intercept",
+      "bindingIDs": [
+        "hammerspoon.command-scroll-up",
+        "hammerspoon.command-scroll-down"
+      ],
+      "severity": "low",
+      "type": "intentional-interception",
+      "summary": "Hammerspoon swallows raw Command-scroll and emits keyboard zoom chords instead.",
+      "evidence": "The eventtap callback returns true after posting Command + = or Command + -.",
+      "recommendedNonDestructiveTest": "Test Command-scroll in one browser and one document app while watching Hammerspoon Console events."
+    },
+    {
+      "id": "conflict.betterstage-middle-click-block",
+      "bindingIDs": [
+        "betterstage.middle-click-snap-wheel"
+      ],
+      "severity": "medium",
+      "type": "mouse-button-shadow",
+      "summary": "BetterStage blocks default middle click when opening its Snap Wheel.",
+      "evidence": "snapWheelTriggers sets mouseButton 2 and blockDefaultClick true.",
+      "recommendedNonDestructiveTest": "Middle-click a browser link and confirm BetterStage opens the wheel instead of the background tab."
+    }
+  ],
+  "unresolved": [],
+  "recommendedShortcutCoachChanges": {
+    "add": [
+      {
+        "bindingID": "macos.symbolic-hotkey-60",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.symbolic-hotkey-61",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.symbolic-hotkey-79",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.symbolic-hotkey-80",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.symbolic-hotkey-81",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.symbolic-hotkey-82",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.mission-control",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.app-expose",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-fill",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-center",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-left",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-right",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-top",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-bottom",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.tile-restore",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-left-right",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-right-left",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-top-bottom",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-bottom-top",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-left-quarters",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-right-quarters",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-top-quarters",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      },
+      {
+        "bindingID": "macos.arrange-bottom-quarters",
+        "reason": "Add to a separate macOS system-shortcuts layer; this is verified current configuration or an official system default, not an app-catalog item."
+      }
+    ],
+    "update": [],
+    "keepSeparateFromBuiltInCatalog": [
+      {
+        "bindingID": "karabiner.fn-left",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-right",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-up",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-down",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-shift-left",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-shift-right",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-shift-up",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.fn-shift-down",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.command-y-redo",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "karabiner.control-delete-word",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "hammerspoon.command-scroll-up",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "hammerspoon.command-scroll-down",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "betterstage.middle-click-snap-wheel",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      },
+      {
+        "bindingID": "betterstage.four-finger-tap-snap-wheel",
+        "reason": "Personal machine customization; expose as a local environment overlay without changing the immutable built-in catalog."
+      }
+    ],
+    "omit": []
+  }
+}
