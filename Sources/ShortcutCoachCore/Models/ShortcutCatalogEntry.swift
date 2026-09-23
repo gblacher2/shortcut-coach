@@ -56,7 +56,7 @@ public struct ShortcutCatalogEntry: Codable, Identifiable, Hashable, Sendable {
     public let validation: ValidationMetadata
     public let stability: EntryStability
     public let caveat: String?
-    
+
     // Environment layer extensions
     public let owner: String?
     public let conflictIDs: [String]?

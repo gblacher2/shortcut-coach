@@ -67,4 +67,3 @@ public enum LegacyShortcutIDMigrator {
         return IDs.filter { seen.insert($0).inserted }
     }
 }
-

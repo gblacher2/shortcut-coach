@@ -45,4 +45,3 @@ final class MainWindowCoordinator {
         NSApp.activate(ignoringOtherApps: true)
     }
 }
-

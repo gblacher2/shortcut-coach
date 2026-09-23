@@ -357,7 +357,7 @@ A failed verification means the task is not complete. Report the exact failure i
   /Users/gabrielblacher/Library/Preferences/com.apple.symbolichotkeys.plist: OK
   /Users/gabrielblacher/Library/Preferences/app.betterstage.macos.plist: OK
 
-  > defaults read -g ApplePressAndHoldEnabled 
+  > defaults read -g ApplePressAndHoldEnabled
   0
   > defaults read -g KeyRepeat
   2

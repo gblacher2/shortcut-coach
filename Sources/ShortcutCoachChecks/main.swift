@@ -247,7 +247,7 @@ check("conflict metadata resolves on exactly four affected bindings", loaded.env
 check("entry conflict IDs remain stable IDs", myMacEntries
     .flatMap { $0.conflictIDs ?? [] }
     .allSatisfy { loaded.environmentConflictsByID[$0] != nil })
-check("category counts are 17 window, 6 spaces/mission, 12 text, 2 input", 
+check("category counts are 17 window, 6 spaces/mission, 12 text, 2 input",
     myMacEntries.filter { $0.category == "window-management" }.count == 17
         && myMacEntries.filter { $0.category == "spaces" || $0.category == "mission-control" }.count == 6
         && myMacEntries.filter { $0.category == "text-editing" }.count == 12

@@ -124,7 +124,9 @@ case "$MODE" in
     done
     echo "  ✓ Resource bundles present ($CORE_RESOURCE_BUNDLE, $APP_RESOURCE_BUNDLE)"
     if [ -f "$APP_RESOURCES/$APP_RESOURCE_BUNDLE/mac-shortcuts.json" ] || \
-       [ -f "$APP_RESOURCES/$APP_RESOURCE_BUNDLE/my-mac-environment.json" ]; then
+       [ -f "$APP_RESOURCES/$APP_RESOURCE_BUNDLE/Contents/Resources/mac-shortcuts.json" ] || \
+       [ -f "$APP_RESOURCES/$APP_RESOURCE_BUNDLE/my-mac-environment.json" ] || \
+       [ -f "$APP_RESOURCES/$APP_RESOURCE_BUNDLE/Contents/Resources/my-mac-environment.json" ]; then
       echo "FAIL: duplicate catalog resource found outside the core bundle" >&2; exit 1
     fi
     echo "  ✓ No duplicate catalog resources in the app bundle"
@@ -145,6 +147,9 @@ case "$MODE" in
 
     # 6. Validate the immutable, versioned catalog inside the staged core bundle.
     CATALOG_PATH="$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/mac-shortcuts.json"
+    if [ -f "$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/Contents/Resources/mac-shortcuts.json" ]; then
+      CATALOG_PATH="$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/Contents/Resources/mac-shortcuts.json"
+    fi
     if [ ! -f "$CATALOG_PATH" ]; then
       echo "FAIL: immutable catalog missing or malformed" >&2; exit 1
     fi
@@ -158,6 +163,9 @@ case "$MODE" in
 
     # 7. Validate the separate, versioned My Mac environment resource.
     ENVIRONMENT_PATH="$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/my-mac-environment.json"
+    if [ -f "$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/Contents/Resources/my-mac-environment.json" ]; then
+      ENVIRONMENT_PATH="$APP_RESOURCES/$CORE_RESOURCE_BUNDLE/Contents/Resources/my-mac-environment.json"
+    fi
     if [ ! -f "$ENVIRONMENT_PATH" ]; then
       echo "FAIL: My Mac environment resource missing" >&2; exit 1
     fi

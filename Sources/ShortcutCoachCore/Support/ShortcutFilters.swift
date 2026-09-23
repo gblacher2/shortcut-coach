@@ -43,7 +43,7 @@ public struct ShortcutSearchService: Sendable {
             filtered.removeAll { $0.environmentClassification != .keepSeparateFromBuiltInCatalog }
         case let .app(appID): filtered.removeAll { $0.appID != appID }
         case let .tag(tag): filtered.removeAll { !$0.taskTags.contains(tag) }
-        case let .category(cat): 
+        case let .category(cat):
             if cat == "spaces-mission-control" {
                 filtered.removeAll { $0.category != "spaces" && $0.category != "mission-control" }
             } else {
