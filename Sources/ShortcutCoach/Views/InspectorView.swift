@@ -286,6 +286,7 @@ struct InspectorView: View {
                 Label("Copy Shortcut", systemImage: "doc.on.doc")
             }
             .help("Copy \(shortcut.displayText)")
+            .accessibilityLabel("Copy Shortcut")
             .keyboardShortcut("c", modifiers: [.command, .shift])
         }
     }
