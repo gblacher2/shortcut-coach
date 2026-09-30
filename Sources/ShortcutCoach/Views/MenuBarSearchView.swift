@@ -23,11 +23,26 @@ struct MenuBarSearchView: View {
                 .accessibilityLabel("Shortcut scope")
                 .accessibilityHint("Choose Everything, My Mac, or one supported app")
 
-                TextField("Search shortcuts", text: $query)
-                    .textFieldStyle(.roundedBorder)
-                    .focused($searchFocused)
-                    .accessibilityLabel("Search shortcuts")
-                    .accessibilityHint("Matches actions, apps, keys, outputs, sources, categories, and guidance")
+                HStack {
+                    TextField("Search shortcuts", text: $query)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($searchFocused)
+                        .accessibilityLabel("Search shortcuts")
+                        .accessibilityHint("Matches actions, apps, keys, outputs, sources, categories, and guidance")
+
+                    if !query.isEmpty {
+                        Button {
+                            query = ""
+                            searchFocused = true
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Clear search")
+                        .help("Clear search")
+                    }
+                }
 
                 if let notice = store.environmentNotice {
                     Label("My Mac unavailable; apps work", systemImage: "exclamationmark.triangle.fill")
