@@ -21,6 +21,12 @@ swift run ShortcutCoachChecks
 # Other modes
 ./script/build_and_run.sh --debug    # launch under lldb
 ./script/build_and_run.sh --logs     # stream os_log output
+
+# Build, verify, and copy the staged app into ~/Applications
+./script/install_local_app.sh
+
+# Same install, into /Applications (may need sudo)
+./script/install_local_app.sh --system
 ```
 
 > **IMPORTANT:** `swift test` silently no-ops on this machine (Command Line Tools only — no XCTest runner). Use `swift run ShortcutCoachChecks` for logic checks and `./script/build_and_run.sh --verify` for full end-to-end verification.
