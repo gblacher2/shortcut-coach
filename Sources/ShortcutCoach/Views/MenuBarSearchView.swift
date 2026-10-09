@@ -28,6 +28,20 @@ struct MenuBarSearchView: View {
                     .focused($searchFocused)
                     .accessibilityLabel("Search shortcuts")
                     .accessibilityHint("Matches actions, apps, keys, outputs, sources, categories, and guidance")
+                    .overlay(alignment: .trailing) {
+                        if !query.isEmpty {
+                            Button {
+                                query = ""
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(.secondary)
+                                    .padding(.trailing, 8)
+                            }
+                            .buttonStyle(.plain)
+                            .help("Clear search")
+                            .accessibilityLabel("Clear search")
+                        }
+                    }
 
                 if let notice = store.environmentNotice {
                     Label("My Mac unavailable; apps work", systemImage: "exclamationmark.triangle.fill")
