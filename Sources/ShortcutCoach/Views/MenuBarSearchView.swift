@@ -25,6 +25,20 @@ struct MenuBarSearchView: View {
 
                 TextField("Search shortcuts", text: $query)
                     .textFieldStyle(.roundedBorder)
+                    .overlay(alignment: .trailing) {
+                        if !query.isEmpty {
+                            Button {
+                                query = ""
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.trailing, 6)
+                            .accessibilityLabel("Clear search")
+                            .help("Clear search")
+                        }
+                    }
                     .focused($searchFocused)
                     .accessibilityLabel("Search shortcuts")
                     .accessibilityHint("Matches actions, apps, keys, outputs, sources, categories, and guidance")
